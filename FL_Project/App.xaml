@@ -5,13 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:views="clr-namespace:FL_Project.Skins"
              StartupUri="MainWindow.xaml"
              mc:Ignorable="d ignore">
-    
+
     <Application.Resources>
         <!--Global View Model Locator-->
-        <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" />
+        <vm:ViewModelLocator    x:Key="Locator" d:IsDataSource="True" />
+
+        <DataTemplate DataType="{x:Type vm:CallCenterViewModle }" >
+            <views:CallCenterUC></views:CallCenterUC>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AnalyzeViewModle}">
+            <views:AnalyzeUC></views:AnalyzeUC>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MapViewModle}">
+            <views:MapUC></views:MapUC>
+        </DataTemplate>
     </Application.Resources>
-    
+
+
+
 </Application>

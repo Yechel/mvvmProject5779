@@ -5,28 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        Height="300"
-        Width="300"
-        Title="MVVM Light Application"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
-    
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Skins/MainSkin.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        xmlns:uc="clr-namespace:FL_Project.Skins"
+        xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Maps;assembly=Syncfusion.SfMaps.WPF" 
+        Title="MainWindow" Height="802" Width="1174" WindowState="Maximized">
+    <DockPanel LastChildFill="True" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        <Expander ExpandDirection="Left"  DockPanel.Dock="Left" IsExpanded="False" >
+            <Expander.Header>
+                <TextBlock Text="More Detailes">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+            </Expander.Header>
+            <DockPanel DockPanel.Dock="Left"  LastChildFill="True">
+                <DockPanel DockPanel.Dock="Top" LastChildFill="False" >
+                    <Button   Content="Call Center" DockPanel.Dock="Left" Width="99" Height="25" Command="{Binding CallCenterViewCommand}" Margin="5,10" />
+                    <Button  Content="Analyze" DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding AnalyzeViewCommand}" Margin="5,10"  />
+                </DockPanel>
+                <Grid DockPanel.Dock="Bottom" MinWidth="650"  >
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
+                </Grid>
 
-    <Grid x:Name="LayoutRoot">
 
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
+            </DockPanel>
 
-    </Grid>
+
+        </Expander>
+        <Grid  DockPanel.Dock ="Right">
+            <uc:MapUC/>
+        </Grid>
+    </DockPanel>
 </Window>

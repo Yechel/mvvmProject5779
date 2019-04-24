@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="FL_Project.Skins.MapUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FL_Project.Skins"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Maps;assembly=Syncfusion.SfMaps.WPF" 
+
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             
+          >
+
+
+    <Grid x:Name="Root"  DataContext="{Binding MapVM, Source={StaticResource Locator}}">
+
+        <!--`  <syncfusion:SfMap x:Name="SFMap" EnableZoom="False" LatitudeLongitudeType="Decimal"  Grid.Column="0"   ZoomLevel="4" Language="Heb" Margin="12,6,-12,-6"  >
+                <syncfusion:SfMap.Layers>
+                    <syncfusion:ImageryLayer Markers = "{Binding Models}" Language="Heb" LayerType="Bing"  >
+                        <syncfusion:ImageryLayer.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <Canvas>
+                                        <Image Source="pin.png" Height="30"/>
+                                    </Canvas>
+                                    <Grid DataContext="{Binding Data}" Width="265">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Canvas Grid.Row="0" Grid.Column="0" Margin="0,0,106,0">
+                                            <Image Source="mappath.png" Width="92" Canvas.Top="25" Canvas.Left="10"/>
+                                            <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="15" FontFamily="Segoe UI" Text="{Binding Name}" Canvas.Left="25" Canvas.Top="25" RenderTransformOrigin="0.515,-0.3"/>
+                                        </Canvas>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </syncfusion:ImageryLayer.MarkerTemplate>
+                    </syncfusion:ImageryLayer>
+                </syncfusion:SfMap.Layers>
+
+            </syncfusion:SfMap >
+
+-->
+        <syncfusion:SfMap x:Name="map" ZoomLevel="5">
+            <syncfusion:SfMap.Layers>
+                <syncfusion:ShapeFileLayer x:Name="SFL" Uri="C:\Users\יחיאל\Source\Repos\FL_Project\FL_Project\Maps\Israel.shp"  Background="AliceBlue">
+                 
+                    <syncfusion:ShapeFileLayer.Annotations>
+                        <syncfusion:MapAnnotations Latitude="31.76367679378092" Longitude="35.22701968033334" AnnotationLabel="ירושלים" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="20" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Red" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Ellipse Fill="Orange" Height="10" Width="10">
+                                </Ellipse>
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="40" Longitude="-98" AnnotationLabel="Unites States of America" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="20" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Red" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol>
+                                <Ellipse Fill="Orange" Height="10" Width="10">
+                                </Ellipse>
+                            </syncfusion:MapAnnotations.AnnotationSymbol>
+                        </syncfusion:MapAnnotations>
+                    </syncfusion:ShapeFileLayer.Annotations>
+                </syncfusion:ShapeFileLayer>
+            </syncfusion:SfMap.Layers>
+        </syncfusion:SfMap >
+
+
+    </Grid>
+
+
+
+
+</UserControl>

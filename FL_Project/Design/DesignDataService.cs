@@ -3,7 +3,7 @@ using FL_Project.Model;
 
 namespace FL_Project.Design
 {
-    public class DesignDataService : IDataService
+    public class DesignDataService 
     {
         public void GetData(Action<DataItem, Exception> callback)
         {

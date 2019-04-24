@@ -9,10 +9,14 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
+using GalaSoft.MvvmLight.Messaging;
+
 using FL_Project.Model;
+using System;
+using System.Windows;
 
 namespace FL_Project.ViewModel
 {
@@ -25,29 +29,19 @@ namespace FL_Project.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        static ViewModelLocator()
+
+        public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IDataService, DataService>();
-            }
-
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CallCenterViewModle>();
+            SimpleIoc.Default.Register<AnalyzeViewModle>();
+            SimpleIoc.Default.Register<MapViewModle>();
+            Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
         }
 
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
+        public MainViewModel MainViewModel
         {
             get
             {
@@ -55,11 +49,42 @@ namespace FL_Project.ViewModel
             }
         }
 
-        /// <summary>
-        /// Cleans up all the resources.
-        /// </summary>
-        public static void Cleanup()
+        public AnalyzeViewModle AnalyzeVM
         {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AnalyzeViewModle>();
+            }
         }
+
+        public CallCenterViewModle CallCenterVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CallCenterViewModle>();
+            }
+        }
+
+        public MapViewModle MapVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MapViewModle>();
+            }
+        }
+
+        internal static void Cleanup()
+        {
+            FallLocationService.DataChanged = null;
+            Console.Out.WriteLine("program close...");
+        }
+
+        private void NotifyUserMethod(NotificationMessage message)
+        {
+            MessageBox.Show(message.Notification);
+        }
+
+    } 
+
+        
     }
-}

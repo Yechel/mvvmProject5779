@@ -17,6 +17,7 @@ namespace FL_Project.Properties
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
     {
 
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
 
         public static Settings Default
@@ -24,6 +25,36 @@ namespace FL_Project.Properties
             get
             {
                 return defaultInstance;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int fallLocationCounter
+        {
+            get
+            {
+                return ((int)(this["fallLocationCounter"]));
+            }
+            set
+            {
+                this["fallLocationCounter"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\יחיאל\\Source\\Repos\\FL_Project\\FL_Project\\afl_pics")]
+        public string PicPathLocation
+        {
+            get
+            {
+                return ((string)(this["PicPathLocation"]));
+            }
+            set
+            {
+                this["PicPathLocation"] = value;
             }
         }
     }
