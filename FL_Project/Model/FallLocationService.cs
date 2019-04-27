@@ -35,6 +35,7 @@ namespace FL_Project.Model
                         try
                         {
                             FallLocationData = new ObservableCollection<FallsLocationGroup>();
+                           
                         //getting the falls from the Data Source and orderong it into list
                         Dictionary<string, ObservableCollection<FallLocation>> locationData = new Dictionary<string, ObservableCollection<FallLocation>>();
                             string key;
@@ -119,6 +120,17 @@ namespace FL_Project.Model
             }
         }
 
+        //TODO: realImplimentation
+       private static double movement = 0;
+        internal static double[] getLocation(string adress)
+        {
+            double d1  = 31.76367679378092 + movement;
+            double d2 = 35.22701968033334 + movement;
+            movement = movement + 0.01111;
+            double[] d = { d1, d2 };
+            return d;
+        }
+
         internal static string getAdressFromPath(string picPath)
         {
             //TODO: add this function
@@ -155,7 +167,7 @@ namespace FL_Project.Model
             return fallLocations;
 
         }
-
+        //TODO need to add to SQL
         internal static void addAFL(AccurateFallLocation afl)
         {
             string key = createKey(afl.Date);

@@ -8,10 +8,57 @@
         xmlns:uc="clr-namespace:FL_Project.Skins"
         xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Maps;assembly=Syncfusion.SfMaps.WPF" 
         Title="MainWindow" Height="802" Width="1174" WindowState="Maximized">
+    <Window.Resources>
+        <Style x:Key="MyExpanderStyle" TargetType="Expander">
+            <Setter Property="BorderBrush" Value="CornflowerBlue" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="LightCyan"/>
+        </Style>
+        <Style x:Key="ToggeleButtonStyle" TargetType="ToggleButton">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="RoyalBlue"/>
+                    <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                    <Setter Property="Foreground" Value="LightCyan"/>
+                    
+                </Trigger>
+                <Trigger Property="IsPressed" Value="False">
+                    <Setter Property="Background" Value="LightCyan"/>
+                    <Setter Property="BorderBrush" Value="LightCyan"/>
+                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                </Trigger>
+            </Style.Triggers>
+            <EventSetter Event="MouseEnter" Handler="ToggleButton_MouseEnter"/>
+            <EventSetter Event="MouseLeave" Handler="ToggleButton_MouseLeave"/>
+            <EventSetter Event="Click" Handler="ToggleButton_Click"/>
+
+        </Style>
+        
+        <Style x:Key="MyTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="CornflowerBlue"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontStretch" Value="UltraExpanded"/>
+        </Style>
+
+
+
+    </Window.Resources>
     <DockPanel LastChildFill="True" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
-        <Expander ExpandDirection="Left"  DockPanel.Dock="Left" IsExpanded="False" >
+
+        <Expander x:Name="Expander" ExpandDirection="Left"  DockPanel.Dock="Left" IsExpanded="False" Style="{StaticResource MyExpanderStyle}" >
             <Expander.Header>
-                <TextBlock Text="More Detailes">
+                <TextBlock Text="More Detailes"  Style="{StaticResource  MyTextBlockStyle }" RenderTransformOrigin="0.5,0.5" Height="20" Width="{Binding ElementName=Expander,Path=ActualHeight}">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.659"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-0.489"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
                     <TextBlock.LayoutTransform>
                         <RotateTransform Angle="-90"/>
                     </TextBlock.LayoutTransform>
@@ -19,16 +66,13 @@
             </Expander.Header>
             <DockPanel DockPanel.Dock="Left"  LastChildFill="True">
                 <DockPanel DockPanel.Dock="Top" LastChildFill="False" >
-                    <Button   Content="Call Center" DockPanel.Dock="Left" Width="99" Height="25" Command="{Binding CallCenterViewCommand}" Margin="5,10" />
-                    <Button  Content="Analyze" DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding AnalyzeViewCommand}" Margin="5,10"  />
+                    <ToggleButton x:Name="CallCenterB"  Content="Call Center" Style="{StaticResource ToggeleButtonStyle}"  DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding CallCenterViewCommand}" Margin="5,10" />
+                    <ToggleButton x:Name="AnalyzeB" Content="Analyze" Style="{StaticResource ToggeleButtonStyle}" DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding AnalyzeViewCommand}" Margin="5,10"  />
                 </DockPanel>
                 <Grid DockPanel.Dock="Bottom" MinWidth="650"  >
                     <ContentControl Content="{Binding CurrentViewModel}"/>
                 </Grid>
-
-
             </DockPanel>
-
 
         </Expander>
         <Grid  DockPanel.Dock ="Right">

@@ -2,24 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:vm ="clr-namespace:FL_Project.ViewModel"
-             xmlns:model ="clr-namespace:FL_Project.Model"
-             xmlns:local="clr-namespace:FL_Project.Skins"
-              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-             xmlns:converters="clr-namespace:FL_Project.Converters"
-              xmlns:extended="wpf.tool"
-              
-             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             x:Class="FL_Project.Skins.CallCenterUC"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:converters="clr-namespace:FL_Project.Converters"
+    x:Class="FL_Project.Skins.CallCenterUC"
               
               
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="400">
     <UserControl.Resources>
         <converters:IntToStringConverter x:Key="IntToStringConverter"/>
-
+        <Style x:Key="TabNavigationStyle" TargetType="syncfusion:TabNavigationControl">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background" Value="CadetBlue"/>
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
     </UserControl.Resources>
 
 
@@ -37,7 +34,7 @@
 
             <!-- TabNavigationControl -->
 
-            <syncfusion:TabNavigationControl  x:Name="newFallLocationTN" SelectedIndex="1" IsKeyboardNavigation="False"  SelectionChanging="NewFallLocationTN_SelectionChanging"  Margin="15,0,15,11">
+            <syncfusion:TabNavigationControl  x:Name="newFallLocationTN"  SelectedIndex="1" IsKeyboardNavigation="False"  SelectionChanging="NewFallLocationTN_SelectionChanging"  Margin="15,0,15,11">
 
                 <syncfusion:TabNavigationItem  >
 

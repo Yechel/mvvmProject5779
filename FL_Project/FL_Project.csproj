@@ -109,6 +109,8 @@
     <Compile Include="Model\FallLocation.cs" />
     <Compile Include="Model\FallLocationService.cs" />
     <Compile Include="Model\FallsLocationGroup.cs" />
+    <Compile Include="ShapesFL\EllipseFL.cs" />
+    <Compile Include="ShapesFL\StarFL.cs" />
     <Compile Include="Skins\AnalyzeUC.xaml.cs">
       <DependentUpon>AnalyzeUC.xaml</DependentUpon>
     </Compile>
