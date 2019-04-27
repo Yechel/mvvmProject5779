@@ -84,28 +84,7 @@ namespace FL_Project.Skins
 
 
 
-        private void CB_Checked(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.BeginInvoke((Action)(() =>
-            {
-                if (SelectAllCB.IsChecked == true)
-                {
-                    SelectAccurateCB.IsChecked = true;
-                    SelectAccurateCB.IsEnabled = false;
-                    SelectEstimateCB.IsChecked = true;
-                    SelectEstimateCB.IsEnabled = false;
-                    SelectReportedCB.IsChecked = true;
-                    SelectReportedCB.IsEnabled = false;
-                }
-                else //(SelectAllCB.IsChecked != true)
-                {
-                    SelectAccurateCB.IsEnabled = true;
-                    SelectEstimateCB.IsEnabled = true;
-                    SelectReportedCB.IsEnabled = true;
-                }
-
-            }));
-        }
+       
 
         Point startPoint;
         private void List_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -186,27 +165,7 @@ namespace FL_Project.Skins
             PicPathV.Content = "";
         }
 
-        private void NewFallLocationTN_SelectionChanging(object sender, Syncfusion.Windows.Tools.Controls.TabSelectionChangingEventArgs e)
-        {
-            var col = (Syncfusion.Windows.Tools.Controls.TabNavigationControl)sender;
-            if (newFallLocationTN.SelectedIndex == 1)
-            {
-                // col.SelectedTabItem = (Syncfusion.Windows.Tools.Controls.TabNavigationItem)e.OldItem;
-
-                Action d = new Action(() => { newFallLocationTN.SelectedIndex++; });
-                Dispatcher.BeginInvoke(d, null);
-
-            }
-            else
-            {
-                Action d = new Action(()=> { newFallLocationTN.SelectedIndex--; });
-                Dispatcher.BeginInvoke(d,null);
-           
-            }
-            
-            e.Cancel = true;
-          
-        }
+   
 
         
     }

@@ -7,7 +7,7 @@
         mc:Ignorable="d ignore"
         xmlns:uc="clr-namespace:FL_Project.Skins"
         xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Maps;assembly=Syncfusion.SfMaps.WPF" 
-        Title="MainWindow" Height="802" Width="1174" WindowState="Maximized">
+        Title="FALL LOCATION ANALYZER" Height="802" Width="1174" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="MyExpanderStyle" TargetType="Expander">
             <Setter Property="BorderBrush" Value="CornflowerBlue" />
@@ -21,6 +21,7 @@
                     <Setter Property="BorderBrush" Value="RoyalBlue"/>
                     <Setter Property="Foreground" Value="LightCyan"/>
                     
+                    
                 </Trigger>
                 <Trigger Property="IsPressed" Value="False">
                     <Setter Property="Background" Value="LightCyan"/>
@@ -31,6 +32,7 @@
             <EventSetter Event="MouseEnter" Handler="ToggleButton_MouseEnter"/>
             <EventSetter Event="MouseLeave" Handler="ToggleButton_MouseLeave"/>
             <EventSetter Event="Click" Handler="ToggleButton_Click"/>
+            <Setter Property="FontSize" Value="14"/>
 
         </Style>
         

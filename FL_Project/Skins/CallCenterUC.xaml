@@ -12,10 +12,14 @@
              d:DesignHeight="450" d:DesignWidth="400">
     <UserControl.Resources>
         <converters:IntToStringConverter x:Key="IntToStringConverter"/>
-        <Style x:Key="TabNavigationStyle" TargetType="syncfusion:TabNavigationControl">
+        <Style x:Key="GridStyle" TargetType="Grid">
+            <Setter Property="Background" Value="PowderBlue"/>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="3"/>
-            <Setter Property="Background" Value="CadetBlue"/>
-            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderBrush" Value="PowderBlue" />
+            <Setter Property="BorderThickness" Value="1.5" />
         </Style>
     </UserControl.Resources>
 
@@ -31,182 +35,127 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+            <Border Style="{StaticResource BorderStyle}">
+            <Grid Name="NewFL_G" Grid.Row="0">
+                <Grid Style="{StaticResource GridStyle}">
 
-            <!-- TabNavigationControl -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-            <syncfusion:TabNavigationControl  x:Name="newFallLocationTN"  SelectedIndex="1" IsKeyboardNavigation="False"  SelectionChanging="NewFallLocationTN_SelectionChanging"  Margin="15,0,15,11">
-
-                <syncfusion:TabNavigationItem  >
-
-                    <syncfusion:TabNavigationItem.Content>
-                        <Grid Background="#FFF1C895" >
-
-
-                        </Grid>
-                    </syncfusion:TabNavigationItem.Content>
-                </syncfusion:TabNavigationItem>
-                <!-- TabNavigationItem 1 -->
-                <syncfusion:TabNavigationItem Header="Report about new Fall Location"  >
-
-                    <syncfusion:TabNavigationItem.Content>
-                        <Grid Background="#FFF1C895" >
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="3*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-
-                            <Label Content="Add New Fall Location"/>
-                            <Grid x:Name="AddNewFallLoctionPropertiesG" Grid.Row="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="2*"/>
-                                </Grid.RowDefinitions>
-                                <TextBox x:Name="NewFallAdressTB"  Margin="0,10,0,11" Padding="10,3" Text="{Binding NewFallLocationAdress, Mode=OneWayToSource}"  />
-                                <TextBlock Grid.Row="0" IsHitTestVisible="False" Text="Enter Address Here" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0,3,3,3" Margin="35,0,0,0" Foreground="DarkGray">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=NewFallAdressTB}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <!-- <syncfusion:TimeSpanEdit x:Name="ReportTS" Grid.Row="1" />-->
-
-                                <!--TimeSpanEdit Visual Style -->
-
-                                <TextBox Grid.Row="1" x:Name="NewNumberOfFallsTB" Padding="10,3" Margin="25,7,25,7"  Text="{Binding NewFallLocationNumberOfFalls, Converter={StaticResource IntToStringConverter},BindsDirectlyToSource=True,Mode=OneWayToSource}"/>
-                                <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Enter Number Of Falls Here" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0,3,3,3" Margin="35,0,0,0" Foreground="DarkGray">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=NewNumberOfFallsTB}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <StackPanel Grid.Row="2" >
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Date:" />
-                                        <syncfusion:SfDatePicker  x:Name="sfdatePicker"  SetValueOnLostFocus="True"  VerticalAlignment="Center"  HorizontalAlignment="Center" Height="25"  FormatString="dd\/MM\/yy" DropDownHeight="300" DateTime="{Binding NewFallLocationDate,Mode=OneWayToSource}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Time:" />
-                                        <syncfusion:SfTimePicker  Grid.Row="2" VerticalAlignment="Center"  SetValueOnLostFocus="True"   FormatString="HH:mm" Height="25" DropDownHeight="300" Value="{Binding NewFallLocationTime,Mode=OneWayToSource }"  />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                            <Button Grid.Row="2" Content="Add"  Command="{Binding AddNewFallCommand}"  Padding="10,3" Margin="128,10,129,11">
-                                <!--  <Button.CommandParameter>
+                    <Label Content="Add New Fall Location"/>
+                    <Grid x:Name="AddNewFallLoctionPropertiesG" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="NewFallAdressTB"  Margin="0,10,0,11" Padding="10,3" Text="{Binding NewFallLocationAdress, Mode=OneWayToSource}"  />
+                        <TextBlock Grid.Row="0" IsHitTestVisible="False" Text="Enter Address Here" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0,3,3,3" Margin="35,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=NewFallAdressTB}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox Grid.Row="1" x:Name="NewNumberOfFallsTB" Padding="10,3" Margin="25,7,25,7"  Text="{Binding NewFallLocationNumberOfFalls, Converter={StaticResource IntToStringConverter},BindsDirectlyToSource=True,Mode=OneWayToSource}"/>
+                        <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Enter Number Of Falls Here" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0,3,3,3" Margin="35,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=NewNumberOfFallsTB}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <StackPanel Grid.Row="2" >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Date:" />
+                                <syncfusion:SfDatePicker  x:Name="sfdatePicker"  SetValueOnLostFocus="True"  VerticalAlignment="Center"  HorizontalAlignment="Center" Height="25"  FormatString="dd\/MM\/yy" DropDownHeight="300" DateTime="{Binding NewFallLocationDate,Mode=OneWayToSource}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Time:" />
+                                <syncfusion:SfTimePicker  Grid.Row="2" VerticalAlignment="Center"  SetValueOnLostFocus="True"   FormatString="HH:mm" Height="25" DropDownHeight="300" Value="{Binding NewFallLocationTime,Mode=OneWayToSource }"  />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Button Grid.Row="2" Content="Add"  Command="{Binding AddNewFallCommand}"  Padding="10,3" Margin="128,10,129,11">
+                        <!--  <Button.CommandParameter>
                                         <model:FallLocation Id="{Binding PathForId}" Name="{Binding PathForName}"/>
                                     </Button.CommandParameter>-->
-                            </Button>
-                        </Grid>
-                    </syncfusion:TabNavigationItem.Content>
-                </syncfusion:TabNavigationItem>
-                <!-- TabNavigationItem 2 -->
-                <syncfusion:TabNavigationItem Header="Drag Here New Accurate Fall Location" >
-                    <syncfusion:TabNavigationItem.Content>
-                        <Grid Background="#FFF1C895" >
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="3*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-
-                            <Label Content="Drag Here New Accurate Fall Location"/>
-                            <Canvas x:Name="AccurateFLCnvs" Background="LightGray" Grid.Row="1" AllowDrop="True" Drop="DropList_Drop" DragEnter="DropList_DragEnter" DragLeave="DropList_DragLeave" Margin="10,5">
-                                <Canvas.Triggers>
-                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    </Button>
+                </Grid>
 
 
-                                    </EventTrigger>
-                                </Canvas.Triggers>
+            </Grid>
+            </Border>
+            <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
+            <Grid x:Name="NewAFL_G" Style="{StaticResource GridStyle}" >
 
-                                <TextBlock  IsHitTestVisible="False" Text="Enter Address Here" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0,3,3,3" Margin="35,0,0,0" Foreground="DarkGray">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=NewFallAdressTB}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <Button x:Name="RemoveB" Background="Red" Click="RemoveB_Click" Content="X" Visibility="Hidden"/>
-                            </Canvas>
+                
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="3" >
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Date:" />
-                                    <syncfusion:SfDatePicker  x:Name="acuurateDP"  SetValueOnLostFocus="True"  VerticalAlignment="Center"  HorizontalAlignment="Center" Height="25"  FormatString="dd\/MM\/yy" DropDownHeight="300" DateTime="{Binding NewFallLocationDate,Mode=OneWayToSource}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Time:" />
-                                    <syncfusion:SfTimePicker  x:Name="acuurateTP" Grid.Row="2" VerticalAlignment="Center"  SetValueOnLostFocus="True"   FormatString="HH:mm" Height="25" DropDownHeight="300" Value="{Binding NewFallLocationTime,Mode=OneWayToSource}"  />
-                                </StackPanel>
-                            </StackPanel>
-                            <Button Grid.Row="2" Content="Add" Command="{Binding AddNewAccurateFallCommand}" CommandParameter="{Binding ElementName=PicPathV, Path=Content}" Padding="10,3" Margin="128,10,128,11" />
-                            <Label x:Name="PicPathV" Content="{Binding PicPath, Mode=OneWayToSource}" Visibility="Hidden"/>
-                        </Grid>
-                    </syncfusion:TabNavigationItem.Content>
-                </syncfusion:TabNavigationItem>
-
-            </syncfusion:TabNavigationControl>
+                    <Label Content="Drag Here New Accurate Fall Location"/>
+                    <Canvas x:Name="AccurateFLCnvs" Background="LightGray" Grid.Row="1" AllowDrop="True" Drop="DropList_Drop" DragEnter="DropList_DragEnter" DragLeave="DropList_DragLeave" Margin="10,5">
+                        <Canvas.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
 
 
-            <syncfusion:TabNavigationControl x:Name="filterTNC" Grid.Row="2" Margin="15,0,15,11"  IsKeyboardNavigation="False" >
+                            </EventTrigger>
+                        </Canvas.Triggers>
+
+                        <TextBlock  IsHitTestVisible="False" Text="Enter Address Here" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0,3,3,3" Margin="35,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=NewFallAdressTB}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <Button x:Name="RemoveB" Background="Red" Click="RemoveB_Click" Content="X" Visibility="Hidden"/>
+                    </Canvas>
 
 
-                <!-- TabNavigationItem 1 -->
-
-                <syncfusion:TabNavigationItem Header="select witch type of falls display">
-                    <syncfusion:TabNavigationItem.Content>
-                        <Grid Background="#FFA2F195">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1.5*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="filters:"/>
-
-                            <DockPanel LastChildFill="False" Grid.Row="1">
-
-                                <Button DockPanel.Dock="Left" Content="aaa" />
-                                <Button DockPanel.Dock="Left" Content="bbb" />
-                            </DockPanel>
-                            <CheckBox x:Name="SelectAllCB" Click ="CB_Checked" Grid.Row="3" Content="All"/>
-                            <CheckBox x:Name="SelectAccurateCB"  Grid.Row="4" Content="Accurate"/>
-                            <CheckBox x:Name="SelectEstimateCB"  Grid.Row="5" Content="Estimate"/>
-                            <CheckBox x:Name="SelectReportedCB" IsChecked="{Binding  CallCenterVM.SelectedVisible ,Source={StaticResource Locator} ,Mode=OneWay}"   Grid.Row="6" Content="Reported"/>
-
-                        </Grid>
-                    </syncfusion:TabNavigationItem.Content>
-                </syncfusion:TabNavigationItem>
-            </syncfusion:TabNavigationControl>
+                    <StackPanel Grid.Row="3" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Date:" />
+                            <syncfusion:SfDatePicker  x:Name="acuurateDP"  SetValueOnLostFocus="True"  VerticalAlignment="Center"  HorizontalAlignment="Center" Height="25"  FormatString="dd\/MM\/yy" DropDownHeight="300" DateTime="{Binding NewFallLocationDate,Mode=OneWayToSource}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Time:" />
+                            <syncfusion:SfTimePicker  x:Name="acuurateTP" Grid.Row="2" VerticalAlignment="Center"  SetValueOnLostFocus="True"   FormatString="HH:mm" Height="25" DropDownHeight="300" Value="{Binding NewFallLocationTime,Mode=OneWayToSource}"  />
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Grid.Row="2" Content="Add" Command="{Binding AddNewAccurateFallCommand}" CommandParameter="{Binding ElementName=PicPathV, Path=Content}" Padding="10,3" Margin="128,10,128,11" />
+                    <Label x:Name="PicPathV" Content="{Binding PicPath, Mode=OneWayToSource}" Visibility="Hidden"/>
+                </Grid>
 
 
+            </Border>
 
         </Grid>
 
-        <Grid Grid.Column="2">
+        <Border  Grid.Column="2" Style="{StaticResource BorderStyle}">
+        <Grid>
 
             <ListBox x:Name="FallsListLB" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ListOfGruops}" >
                 <ListBox.ItemTemplate>
@@ -245,6 +194,6 @@
             </ListBox>
 
         </Grid>
-
+        </Border>
     </Grid>
 </UserControl>
