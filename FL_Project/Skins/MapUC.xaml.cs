@@ -20,12 +20,13 @@ namespace FL_Project.Skins
     /// </summary>
     public partial class MapUC : UserControl
     {
-       
+
+        MapViewModle instance;
 
         public MapUC()
         {
             InitializeComponent();
-            var instance = SimpleIoc.Default.GetInstance<MapViewModle>();
+            instance = SimpleIoc.Default.GetInstance<MapViewModle>();
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                 if (instance != null)
@@ -35,6 +36,7 @@ namespace FL_Project.Skins
                         item.AnnotationSymbol.MouseEnter += Shape_MouseEnter;
                         item.AnnotationSymbol.MouseLeave += Shape_MouseLeave;
                         item.AnnotationSymbol.MouseDown += Shape_MouseDown;
+                        item.AnnotationSymbol.MouseUp += AnnotationSymbol_MouseUp;
                         SFL.Annotations.Add(item);
                     }
                 }
@@ -48,12 +50,43 @@ namespace FL_Project.Skins
         {
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                        var item = (MapAnnotations) e.NewItems;
+                        var item = (MapAnnotations)((object[])e.NewItems.SyncRoot)[0];
                         item.AnnotationSymbol.MouseEnter += Shape_MouseEnter;
                         item.AnnotationSymbol.MouseLeave += Shape_MouseLeave;
                         item.AnnotationSymbol.MouseDown += Shape_MouseDown;
-                        SFL.Annotations.Add(item);
+                item.AnnotationSymbol.MouseUp += AnnotationSymbol_MouseUp; 
+                SFL.Annotations.Add(item);
             });
+        }
+
+        private void Shape_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var shape = (System.Windows.Shapes.Shape)sender;
+            var key = shape.Uid.Split('_')[1];
+            foreach (var item in instance.DataMapAnnotations ) 
+            {
+                if (item.AnnotationSymbol.Uid.Contains(key))
+                {
+                    item.AnnotationSymbol.Opacity = 0.5;
+
+                }
+            }
+            //  shape.Fill = new SolidColorBrush((Color)System.Windows.Media.ColorConverter.ConvertFromString("Red"));
+        }
+
+
+        private void AnnotationSymbol_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var shape = (System.Windows.Shapes.Shape)sender;
+            var key = shape.Uid.Split('_')[1];
+            foreach (var item in instance.DataMapAnnotations)
+            {
+                if (item.AnnotationSymbol.Uid.Contains(key))
+                {
+                    item.AnnotationSymbol.Opacity = 1;
+
+                }
+            }
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -76,11 +109,7 @@ namespace FL_Project.Skins
 
         }
 
-        private void Shape_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var shape = (System.Windows.Shapes.Shape)sender;
-          //  shape.Fill = new SolidColorBrush((Color)System.Windows.Media.ColorConverter.ConvertFromString("Red"));
-        }
+        
 
         private void Shape_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -98,6 +127,14 @@ namespace FL_Project.Skins
                 shape.Height = StarFL.SHAPE_SMALL_SIZE;
                 shape.Width = StarFL.SHAPE_SMALL_SIZE;
                             }
+            foreach (var item in instance.DataMapAnnotations)
+            {
+                if (item.AnnotationSymbol.Opacity!=1)
+                {
+                    item.AnnotationSymbol.Opacity = 1;
+
+                }
+            }
         }
 
         private void Shape_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
