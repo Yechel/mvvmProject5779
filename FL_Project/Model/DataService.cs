@@ -2,7 +2,7 @@
 
 namespace FL_Project.Model
 {
-    public class DataService //: IDataService
+   /* public class DataService //: IDataService
     {
         public void GetData(Action<DataItem, Exception> callback)
         {
@@ -11,5 +11,5 @@ namespace FL_Project.Model
             var item = new DataItem("Welcome to MVVM Light");
             callback(item, null);
         }
-    }
+    }*/
 }

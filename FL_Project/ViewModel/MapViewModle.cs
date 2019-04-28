@@ -106,7 +106,6 @@ namespace FL_Project.ViewModel
             gruopItem.EstimateFallLocation.PropertyChanged += EstimateFallLocation_PropertyChanged;
             gruopItem.FallsLocationlist.CollectionChanged += FallsLocationlist_CollectionChanged;
 
-
             if (gruopItem.FallsLocationlist != null)
             {
                 foreach (var item in gruopItem.FallsLocationlist)

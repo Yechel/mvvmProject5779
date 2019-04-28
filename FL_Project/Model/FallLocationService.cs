@@ -35,33 +35,33 @@ namespace FL_Project.Model
                         try
                         {
                             FallLocationData = new ObservableCollection<FallsLocationGroup>();
-                           
-                        //getting the falls from the Data Source and orderong it into list
-                        Dictionary<string, ObservableCollection<FallLocation>> locationData = new Dictionary<string, ObservableCollection<FallLocation>>();
+
+                            //getting the falls from the Data Source and orderong it into list
+                            Dictionary<string, ObservableCollection<FallLocation>> locationData = new Dictionary<string, ObservableCollection<FallLocation>>();
                             string key;
-                        //TODO: get data of FallsAs a List as a List  from SQL
-                        List<FallLocation> fallLocations = getDummyList();
-                        //sort the FallLocations to the fit list
-                        fallLocations.ForEach(x =>
-                            {
-                                key = createKey(x.Date);
-
-
-
-                                if (!locationData.ContainsKey(key))
+                            //TODO: get data of FallsAs a List as a List  from SQL
+                            List<FallLocation> fallLocations = getDummyList();
+                            //sort the FallLocations to the fit list
+                            fallLocations.ForEach(x =>
                                 {
-                                    ObservableCollection<FallLocation> oc = new ObservableCollection<FallLocation>();
-                                    oc.Add(x);
-                                    locationData.Add(key, oc);
-                                }
-                                else
-                                {
-                                    locationData[key].Add(x);
-                                }
-                            });
+                                    key = createKey(x.Date);
 
-                        //setting it into the map
-                        foreach (var item in locationData)
+
+
+                                    if (!locationData.ContainsKey(key))
+                                    {
+                                        ObservableCollection<FallLocation> oc = new ObservableCollection<FallLocation>();
+                                        oc.Add(x);
+                                        locationData.Add(key, oc);
+                                    }
+                                    else
+                                    {
+                                        locationData[key].Add(x);
+                                    }
+                                });
+
+                            //setting it into the map
+                            foreach (var item in locationData)
                             {
 
                                 FallsLocationGroup flg = new FallsLocationGroup(item.Key);
@@ -70,33 +70,33 @@ namespace FL_Project.Model
                                     flg.FallsLocationlist.Add(item1);
                                 }
                                 FallLocationData.Add(flg);
-                            /*foreach (FallsLocationGroup group in FallLocationData)
-                            {
-                                if (group.Equals(item.Key)
-                                    {
-                                    group.FallsLocationlist.Add(item.Value as FallLocation);
+                                /*foreach (FallsLocationGroup group in FallLocationData)
+                                {
+                                    if (group.Equals(item.Key)
+                                        {
+                                        group.FallsLocationlist.Add(item.Value as FallLocation);
+                                    }
+                                } (FallLocationData.Contains(item.Key))
+                                {
+
+                                    FallsLocationGroup fg = new FallsLocationGroup(item.Key);
+                                    fg.FallsLocationlist = item.Value;
+                                    fg.EvaluateEstimateFallLocation();
+                                    retrunData.Add(item.Key, fg);
+                                    addFallLocationToTheGroup(item);
                                 }
-                            } (FallLocationData.Contains(item.Key))
-                            {
-
-                                FallsLocationGroup fg = new FallsLocationGroup(item.Key);
-                                fg.FallsLocationlist = item.Value;
-                                fg.EvaluateEstimateFallLocation();
-                                retrunData.Add(item.Key, fg);
-                                addFallLocationToTheGroup(item);
-                            }
-                            else
-                            {
-                                retrunData[item.Key].FallsLocationlist = item.Value;
-                            }*/
+                                else
+                                {
+                                    retrunData[item.Key].FallsLocationlist = item.Value;
+                                }*/
                             }
 
-                        //getting the accurate falls from the Data Source and orderong it into list
-                        //TODO: get AccurateLocation From SQL;
-                        //TODO: add accurateFalls
+                            //getting the accurate falls from the Data Source and orderong it into list
+                            //TODO: get AccurateLocation From SQL;
+                            //TODO: add accurateFalls
 
 
-                        isSucceded = true;
+                            isSucceded = true;
                         }
                         catch
                         {
@@ -121,10 +121,10 @@ namespace FL_Project.Model
         }
 
         //TODO: realImplimentation
-       private static double movement = 0;
+        private static double movement = 0;
         internal static double[] getLocation(string adress)
         {
-            double d1  = 31.76367679378092 + movement;
+            double d1 = 31.76367679378092 + movement;
             double d2 = 35.22701968033334 + movement;
             movement = movement + 0.01111;
             double[] d = { d1, d2 };
@@ -244,5 +244,12 @@ namespace FL_Project.Model
             //TODO impliment real one, now it return a random number 
             return random.Next(0, 150);
         }
+
+
+        static FallLocation EvaluateEstimateFallLocation(ObservableCollection<FallLocation> fallLocations)
+        {
+              //TODO Implement for real
+             return fallLocations.First();
+            }
     }
 }

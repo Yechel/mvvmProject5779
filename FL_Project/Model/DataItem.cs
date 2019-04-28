@@ -1,6 +1,6 @@
 ﻿namespace FL_Project.Model
 {
-    public class DataItem
+  /*  public class DataItem
     {
         public string Title
         {
@@ -12,5 +12,5 @@
         {
             Title = title;
         }
-    }
+    }*/
 }

@@ -3,7 +3,7 @@ using FL_Project.Model;
 
 namespace FL_Project.Design
 {
-    public class DesignDataService 
+  /*  public class DesignDataService 
     {
         public void GetData(Action<DataItem, Exception> callback)
         {
@@ -12,5 +12,5 @@ namespace FL_Project.Design
             var item = new DataItem("Welcome to MVVM Light [design]");
             callback(item, null);
         }
-    }
+    }*/
 }
