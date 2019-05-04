@@ -25,7 +25,10 @@ namespace FL_Project.Model
         private AccurateFallLocation accurateFallLocation;
         public String groupColor;
         private String gruopId;
-        
+        public event Action<FallsLocationGroup,FallLocation> FallLocationChanged;
+        public event Action<FallsLocationGroup> EsimateFallLocationChanged;
+        public event Action<FallsLocationGroup> AccurateFallLocationChanged;
+
         public ObservableCollection<FallLocation> FallsLocationlist
         {
             get
@@ -46,6 +49,10 @@ namespace FL_Project.Model
             set
             {
                 Set<FallLocation>(() => this.EstimateFallLocation, ref estimateFallLocation, value);
+                if (EsimateFallLocationChanged != null)
+                {
+                    EsimateFallLocationChanged.Invoke(this);
+                }
             }
         }
 
@@ -57,6 +64,11 @@ namespace FL_Project.Model
             set
             {
                 Set<AccurateFallLocation>(() => this.AccurateFallLocation, ref accurateFallLocation, value);
+                if (AccurateFallLocationChanged != null)
+                {
+                    AccurateFallLocationChanged.Invoke(this);
+                }
+
             }
         }
 
@@ -70,6 +82,7 @@ namespace FL_Project.Model
             }
             set
             {
+               
                 Set<string>(() => this.GroupColor, ref groupColor, value);
             }
         }
@@ -87,20 +100,46 @@ namespace FL_Project.Model
             }
         }
 
-        public FallsLocationGroup(String _gruopId)
+       /* public FallsLocationGroup(String _gruopId, Action<FallLocation> fallLocationChanged, Action<FallLocation> estimateFallLocationChanged, Action<AccurateFallLocation> accurateFallLocationChanged)
         {
             FallsLocationlist = new ObservableCollection<FallLocation>();
             FallsLocationlist.CollectionChanged += this.OnCollectionChanged;
+            if (fallLocationChanged != null) { 
+            FallLocationChanged = fallLocationChanged;
+             }
+            if (estimateFallLocationChanged != null)
+            {
+                EsimateFallLocationChanged = estimateFallLocationChanged;
+            }
+            if (accurateFallLocationChanged != null)
+            {
+                AccurateFallLocationChanged = accurateFallLocationChanged;
+            }
             EstimateFallLocation = null;
             AccurateFallLocation = null;
             this.GruopId = _gruopId;
             GroupColor = (groupColorsArray[(colorCounter++) % 7]);
+        }*/
+
+        public FallsLocationGroup(String _gruopId)
+        {
+            FallsLocationlist = new ObservableCollection<FallLocation>();
+            EstimateFallLocation = null;
+            AccurateFallLocation = null;
+            this.GruopId = _gruopId;
+            GroupColor = (groupColorsArray[(colorCounter++) % 7]);
+            FallsLocationlist.CollectionChanged += this.OnCollectionChanged;
         }
 
 
         // private NotifyCollectionChangedEventHandler OnCollectionChanged() => EvaluateEstimateFallLocation();
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            var item = (FallLocation) e.NewItems[0];
+            if (FallLocationChanged != null)
+            {
+                FallLocationChanged.Invoke(this,item);
+            }
             EvaluateEstimateFallLocation();
         }
 
@@ -114,15 +153,14 @@ namespace FL_Project.Model
             else
             {
                 //TODO: add here the algorithem of get astimate location as TASK;
-                EstimateFallLocation = FallsLocationlist.First();
-
+                EstimateFallLocation = FallLocationService.EstimateFallLocation(FallsLocationlist);
             };
             
         }
 
         public void AddFallLocation(FallLocation fl) {
             FallsLocationlist.Add(fl);
-            RaisePropertyChanged("FallsLocationlist");
+    //        FallLocationChanged.BeginInvoke(this, null, null);
         }
 
         public override bool Equals(object obj)

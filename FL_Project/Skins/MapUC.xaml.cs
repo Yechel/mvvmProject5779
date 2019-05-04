@@ -33,31 +33,30 @@ namespace FL_Project.Skins
                 {
                     foreach (var item in instance.DataMapAnnotations)
                     {
-                        item.AnnotationSymbol.MouseEnter += Shape_MouseEnter;
-                        item.AnnotationSymbol.MouseLeave += Shape_MouseLeave;
-                        item.AnnotationSymbol.MouseDown += Shape_MouseDown;
-                        item.AnnotationSymbol.MouseUp += AnnotationSymbol_MouseUp;
-                        SFL.Annotations.Add(item);
+                        AddAnotationToMAp(item);
                     }
                 }
             });
             instance.DataMapAnnotations.CollectionChanged += DataMapAnnotations_CollectionChanged;
-
-          
         }
 
         private void DataMapAnnotations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                        var item = (MapAnnotations)((object[])e.NewItems.SyncRoot)[0];
-                        item.AnnotationSymbol.MouseEnter += Shape_MouseEnter;
-                        item.AnnotationSymbol.MouseLeave += Shape_MouseLeave;
-                        item.AnnotationSymbol.MouseDown += Shape_MouseDown;
-                item.AnnotationSymbol.MouseUp += AnnotationSymbol_MouseUp; 
-                SFL.Annotations.Add(item);
+                AddAnotationToMAp((MapAnnotations)((object[])e.NewItems.SyncRoot)[0]);   
             });
         }
+
+    private void AddAnotationToMAp(MapAnnotations item) {
+        item.AnnotationSymbol.MouseEnter += Shape_MouseEnter;
+        item.AnnotationSymbol.MouseLeave += Shape_MouseLeave;
+        item.AnnotationSymbol.MouseDown += Shape_MouseDown;
+        item.AnnotationSymbol.MouseUp += AnnotationSymbol_MouseUp;
+        SFL.Annotations.Add(item);
+    }
+
+
 
         private void Shape_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -89,13 +88,15 @@ namespace FL_Project.Skins
             }
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+    /*    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MapAnnotations ma = new MapAnnotations();
-            ma.Latitude = 31.76367679378092;
-            ma.Longitude = 35.22701968033334;
-            ma.AnnotationLabel = "ירושלים";
-            ma.AnnotationLabelFontSize = 20;
+            MapAnnotations ma = new MapAnnotations
+            {
+                Latitude = 31.76367679378092,
+                Longitude = 35.22701968033334,
+                AnnotationLabel = "ירושלים",
+                AnnotationLabelFontSize = 20
+            };
             var ellipse = new System.Windows.Shapes.Ellipse();
             ellipse.Fill = new SolidColorBrush(Colors.Orange);
             ellipse.Height = 20;
@@ -107,7 +108,7 @@ namespace FL_Project.Skins
             SFL.Annotations.Add(ma);
 
 
-        }
+        }*/
 
         
 
@@ -226,6 +227,8 @@ namespace FL_Project.Skins
         {
             setLableVisability(sender);
         }
+    
+        
     }
 
 

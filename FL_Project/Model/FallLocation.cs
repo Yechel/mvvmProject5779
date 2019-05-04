@@ -34,6 +34,17 @@ namespace FL_Project.Model
             }
         }
 
+        public FallLocation(FallLocation fl)
+        {
+                ID = fl.ID;
+                Adress = fl.Adress;
+                Date = fl.Date;
+                NumberOfFalls = fl.NumberOfFalls;
+        }
+
+
+
+
         public FallLocation(string adress, string date, int numberOfFalls)
         {
             try

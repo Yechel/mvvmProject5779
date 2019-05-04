@@ -28,6 +28,25 @@
             <EventSetter Event="MouseEnter" Handler="Label_MouseEnter"/>
             <EventSetter Event="MouseLeave" Handler="Label_MouseLeave"/>
         </Style>
+        <ToolTip x:Key="AnnotationToolTip" ToolTipService.BetweenShowDelay="1" ToolTipService.InitialShowDelay="2"  >
+            <ToolTip.Template>
+                <ControlTemplate>
+                    <Grid>
+                        <Border Background="Gray"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                Opacity="0.9"
+                                SnapsToDevicePixels="True" />
+                        <TextBlock Margin="5"
+                                    Foreground="WhiteSmoke"
+                                    FontSize="22"
+                                    Text="ToolTipHelper AutoMove sample"
+                                    TextOptions.TextFormattingMode="Display"
+                                    TextOptions.TextRenderingMode="ClearType" />
+                    </Grid>
+                </ControlTemplate>
+            </ToolTip.Template>
+        </ToolTip>
     </UserControl.Resources>
 
 
@@ -63,21 +82,63 @@
             </syncfusion:SfMap >
 
 -->
-        <syncfusion:SfMap x:Name="map">
+        <syncfusion:SfMap x:Name="map"  >
             <syncfusion:SfMap.Layers>
-                <syncfusion:ShapeFileLayer x:Name="SFL" Uri="C:\Users\יחיאל\Source\Repos\FL_Project\FL_Project\Maps\Israel.shp"  Background="GhostWhite">
+                <syncfusion:ShapeFileLayer x:Name="SFL" Uri="C:\Users\יחיאל\Source\Repos\FL_Project\FL_Project\Maps\Israel.shp"  Background="GhostWhite" >
 
                     <syncfusion:ShapeFileLayer.Annotations>
-                        <syncfusion:MapAnnotations Latitude="31.76367679378092" Longitude="35.22701968033334" AnnotationLabel="ירושלים" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="20" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                        <syncfusion:MapAnnotations Latitude="31.76367679378092" Longitude="35.22701968033334"   AnnotationLabel="ירושלים" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="32.069520" Longitude="34.805433"   AnnotationLabel="תל אביב" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="32.811263" Longitude="34.984526"   AnnotationLabel="חיפה" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="31.239554" Longitude="34.795113"   AnnotationLabel="באר שבע" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="29.517044" Longitude="34.923804"   AnnotationLabel="אילת" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="32.977312" Longitude="35.698214"   AnnotationLabel="קצרין" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="31.294468" Longitude="34.263069"   AnnotationLabel="עזה" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="32.109787" Longitude="35.182879"   AnnotationLabel="אריאל" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                            <syncfusion:MapAnnotations.AnnotationSymbol >
+                                <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
+                            </syncfusion:MapAnnotations.AnnotationSymbol >
+                        </syncfusion:MapAnnotations>
+                        <syncfusion:MapAnnotations Latitude="30.615099" Longitude="35.182879"   AnnotationLabel="אריאל" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
                             <syncfusion:MapAnnotations.AnnotationSymbol >
                                 <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
                             </syncfusion:MapAnnotations.AnnotationSymbol >
                         </syncfusion:MapAnnotations>
 
+
                     </syncfusion:ShapeFileLayer.Annotations>
                 </syncfusion:ShapeFileLayer>
             </syncfusion:SfMap.Layers>
         </syncfusion:SfMap >
+        
         <Grid>
             <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource MyBorderStyle}" Margin="0,0,60,60"  >
                 <Grid Height="120" Width="230" Background="LightCyan" Opacity="0.85" HorizontalAlignment="Left" VerticalAlignment="Bottom" UseLayoutRounding="False" >
@@ -93,7 +154,7 @@
                     </Grid.ColumnDefinitions>
                     <Label x:Name="Filter" Foreground="CornflowerBlue" FontSize="14" Content="FILTERS:" Style="{StaticResource MyFilterFontStyle}"/>
                     <Label x:Name="Report" Grid.Row="1" Content="REPORTED FALL LOCATION" MouseUp="Label_Click"  Style="{StaticResource MyFilterFontStyle}"/>
-                    <Ellipse Grid.Row="1" Grid.Column="1" Width="10" Height="10" Fill="Aqua" />
+                    <Ellipse Grid.Row="1" Grid.Column="1" Width="10" Height="10" Fill="Aqua"  />
                     <Label x:Name="Estimate" Grid.Row="2" Content="ESTIMATE FALL LOCATION"  MouseUp="Label_Click"   Style="{StaticResource MyFilterFontStyle}" />
                     <Ellipse Grid.Row="2" Grid.Column="1" Width="10" Height="10" Fill="Aqua" Stroke="Black" />
                     <Label x:Name="Accurate"  Grid.Row="3" Content="ACCURATE FALL LOCATION" MouseUp="Label_Click"  Style="{StaticResource MyFilterFontStyle}"/>

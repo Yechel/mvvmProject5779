@@ -12,7 +12,9 @@ namespace FL_Project.Model
     static class FallLocationService
     {
         public static Action DataChanged;
-
+    //    public static Action NewFLAdded;
+      //  public static Action EstimateFlChanged;
+        //public static Action NewAFLAdded;
 
         private static ObservableCollection<FallsLocationGroup> FallLocationData;
 
@@ -44,14 +46,14 @@ namespace FL_Project.Model
                             //sort the FallLocations to the fit list
                             fallLocations.ForEach(x =>
                                 {
-                                    key = createKey(x.Date);
-
-
-
+                                    key = CreateKey(x.Date);
+                                 
                                     if (!locationData.ContainsKey(key))
                                     {
-                                        ObservableCollection<FallLocation> oc = new ObservableCollection<FallLocation>();
-                                        oc.Add(x);
+                                        ObservableCollection<FallLocation> oc = new ObservableCollection<FallLocation>
+                                        {
+                                            x
+                                        };
                                         locationData.Add(key, oc);
                                     }
                                     else
@@ -67,35 +69,24 @@ namespace FL_Project.Model
                                 FallsLocationGroup flg = new FallsLocationGroup(item.Key);
                                 foreach (var item1 in item.Value)
                                 {
+                                    if (item1 is AccurateFallLocation)
+                                    {
+                                        flg.AccurateFallLocation =new AccurateFallLocation ((AccurateFallLocation)item1);
+                                    }
+                                    else { 
                                     flg.FallsLocationlist.Add(item1);
+                                    }
+                                    
                                 }
                                 FallLocationData.Add(flg);
-                                /*foreach (FallsLocationGroup group in FallLocationData)
-                                {
-                                    if (group.Equals(item.Key)
-                                        {
-                                        group.FallsLocationlist.Add(item.Value as FallLocation);
-                                    }
-                                } (FallLocationData.Contains(item.Key))
-                                {
 
-                                    FallsLocationGroup fg = new FallsLocationGroup(item.Key);
-                                    fg.FallsLocationlist = item.Value;
-                                    fg.EvaluateEstimateFallLocation();
-                                    retrunData.Add(item.Key, fg);
-                                    addFallLocationToTheGroup(item);
-                                }
-                                else
-                                {
-                                    retrunData[item.Key].FallsLocationlist = item.Value;
-                                }*/
                             }
 
                             //getting the accurate falls from the Data Source and orderong it into list
                             //TODO: get AccurateLocation From SQL;
                             //TODO: add accurateFalls
 
-
+                       
                             isSucceded = true;
                         }
                         catch
@@ -120,6 +111,14 @@ namespace FL_Project.Model
             }
         }
 
+        //TODO: implement this with  ניתוח אשכולות
+        internal static FallLocation EstimateFallLocation(ObservableCollection<FallLocation> fallsLocationlist)
+        {
+            return fallsLocationlist.First();
+        }
+
+       
+
         //TODO: realImplimentation
         private static double movement = 0;
         internal static double[] getLocation(string adress)
@@ -131,13 +130,13 @@ namespace FL_Project.Model
             return d;
         }
 
-        internal static string getAdressFromPath(string picPath)
+        internal static string GetAdressFromPath(string picPath)
         {
             //TODO: add this function
             return "חיים  הלוי, 6 שדרות";
         }
 
-        private static string createKey(string date)
+        private static string CreateKey(string date)
         {
             return date.Remove(date.Length - 1, 1) + "0";
         }
@@ -146,6 +145,8 @@ namespace FL_Project.Model
         {
             List<FallLocation> fallLocations = new List<FallLocation>();
 
+            AccurateFallLocation afallLocation1 = new AccurateFallLocation(12, "בר יוחאי 10, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 25, 00)).ToString("MM/dd/yyyy hh:mm"),1, "C:\\User\\יחיאל\\Source\\Repos\\FL_Project\\FL_Project\\afl_pics\\1.jpg");
+            fallLocations.Add(afallLocation1);
             FallLocation fallLocation1 = new FallLocation("בר יוחאי 10, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 25, 00)).ToString("MM/dd/yyyy hh:mm"), 2);
             FallLocation fallLocation2 = new FallLocation("בר יוחאי 11, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 26, 00)).ToString("MM/dd/yyyy hh:mm"), 2);
             FallLocation fallLocation3 = new FallLocation("אבן צורי 9, שדרות, ישראל", (new DateTime(2019, 1, 3, 7, 12, 00)).ToString("MM/dd/yyyy hh:mm"), 1);
@@ -168,9 +169,9 @@ namespace FL_Project.Model
 
         }
         //TODO need to add to SQL
-        internal static void addAFL(AccurateFallLocation afl)
+        internal static void AddAFL(AccurateFallLocation afl)
         {
-            string key = createKey(afl.Date);
+            string key = CreateKey(afl.Date);
             bool isAdded = false;
             foreach (var item in FallLocationData)
             {
@@ -191,11 +192,11 @@ namespace FL_Project.Model
             { DataChanged.Invoke(); };
         }
 
-        public static void addFL(FallLocation fl)
+        public static void AddFL(FallLocation fl)
         {
             //add to DATALayer
             //add fitt gouplist
-            string key = createKey(fl.Date);
+            string key = CreateKey(fl.Date);
             bool isAdded = false;
             foreach (var item in FallLocationData)
             {
@@ -230,7 +231,7 @@ namespace FL_Project.Model
                 {
                     efl = group.EstimateFallLocation;
                     afl = group.AccurateFallLocation;
-                    dis = getDistance(efl, afl);
+                    dis = GetDistance(efl, afl);
                     result.Add(dis);
                 }
             }
@@ -239,7 +240,7 @@ namespace FL_Project.Model
         }
 
         static Random random = new Random();
-        private static int getDistance(FallLocation efl, FallLocation afl)
+        private static int GetDistance(FallLocation efl, FallLocation afl)
         {
             //TODO impliment real one, now it return a random number 
             return random.Next(0, 150);
@@ -250,6 +251,6 @@ namespace FL_Project.Model
         {
               //TODO Implement for real
              return fallLocations.First();
-            }
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace FL_Project.ViewModel
             SetAnnotations();
             var data = FallLocationService.GetData((a) => { });
             //register to new group that added
-            data.CollectionChanged += MapViewModle_CollectionChanged;
+           data.CollectionChanged += MapViewModle_CollectionChanged;
             /*    foreach (var group in data)
              {
                  //register to new Estimate accurate and reported fallLocation that added
@@ -57,92 +57,47 @@ namespace FL_Project.ViewModel
              }*/
         }
 
-        private void FallsLocationlist_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-           
-        }
+      
 
         private void AccurateFallLocation_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-                FallsLocationGroup group = (FallsLocationGroup)sender;
-                if (group.AccurateFallLocation != null)
-                {
-                    SetAnnotation("Accurate", group.AccurateFallLocation.Adress, group.GroupColor, group.GruopId);
-                }
+            FallsLocationGroup group = (FallsLocationGroup)sender;
+            if (group.AccurateFallLocation != null)
+            {
+                SetAnnotation("Accurate", group.AccurateFallLocation.Adress, group.GroupColor, group.GruopId);
+            }
         }
 
         //when estimate FL changing if it is new, then new annotation will be appear, else the exist annotaion will change the lat and long.
-        private void EstimateFallLocation_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            FallsLocationGroup group = (FallsLocationGroup)sender;
-            if (group.EstimateFallLocation == null)
-            {
-                SetAnnotation("Estimate", group.AccurateFallLocation.Adress, group.GroupColor, group.GruopId);
-            }
-            else
-            {
-                var location = FallLocationService.getLocation(group.EstimateFallLocation.Adress);
-                foreach (var item in DataMapAnnotations)
+        /*        private void EstimateFallLocation_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
                 {
-                    if (item.AnnotationSymbol.Uid.Equals("Estimate_" + group.GruopId))
+                    FallsLocationGroup group = (FallsLocationGroup)sender;
+                    if (group.EstimateFallLocation == null)
                     {
-                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                        {
-                            item.Latitude = location[0];
-                            item.Longitude = location[1];
-                        });
+                        SetAnnotation("Estimate", group.AccurateFallLocation.Adress, group.GroupColor, group.GruopId);
                     }
-                }
+                    else
+                    {
+                        var location = FallLocationService.getLocation(group.EstimateFallLocation.Adress);
+                        foreach (var item in DataMapAnnotations)
+                        {
+                            if (item.AnnotationSymbol.Uid.Equals("Estimate_" + group.GruopId))
+                            {
+                                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                {
+                                    item.Latitude = location[0];
+                                    item.Longitude = location[1];
+                                });
+                            }
+                        }
 
-            }
-        }
+                    }
+                }*/
 
         private void MapViewModle_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var gruopItem = (FallsLocationGroup)((object[])e.NewItems.SyncRoot)[0];
-
-            if (gruopItem.AccurateFallLocation != null) { 
-            gruopItem.AccurateFallLocation.PropertyChanged += AccurateFallLocation_PropertyChanged; }
-            gruopItem.EstimateFallLocation.PropertyChanged += EstimateFallLocation_PropertyChanged;
-            gruopItem.FallsLocationlist.CollectionChanged += FallsLocationlist_CollectionChanged;
-
-            if (gruopItem.FallsLocationlist != null)
-            {
-                foreach (var item in gruopItem.FallsLocationlist)
-                {
-                    MapAnnotations annotations = new MapAnnotations();
-                    var location = FallLocationService.getLocation(item.Adress);
-                    annotations.Latitude = location[0];
-                    annotations.Longitude = location[1];
-                    var ellipse = EllipseFL.getEllipse(gruopItem.GroupColor);
-                    annotations.AnnotationSymbol = ellipse;
-                    annotations.AnnotationSymbol.Uid = "Report_" + gruopItem.GruopId;
-                    DataMapAnnotations.Add(annotations);
-                }
-            }
-            if (gruopItem.EstimateFallLocation != null)
-            {
-                MapAnnotations annotations = new MapAnnotations();
-                var location = FallLocationService.getLocation(gruopItem.EstimateFallLocation.Adress);
-                annotations.Latitude = location[0];
-                annotations.Longitude = location[1];
-                var ellipse = EllipseFL.getEllipseWithBorder(gruopItem.GroupColor);
-                annotations.AnnotationSymbol = ellipse;
-                annotations.AnnotationSymbol.Uid = "Estimate_" + gruopItem.GruopId;
-                DataMapAnnotations.Add(annotations);
-            }
-            if (gruopItem.AccurateFallLocation != null)
-            {
-                MapAnnotations annotations = new MapAnnotations();
-                var location = FallLocationService.getLocation(gruopItem.AccurateFallLocation.Adress);
-                annotations.Latitude = location[0];
-                annotations.Longitude = location[1];
-                var star = StarFL.getStarShape(gruopItem.GroupColor);
-                annotations.AnnotationSymbol = star;
-                annotations.AnnotationSymbol.Uid = "Accurate_" + gruopItem.GruopId;
-                DataMapAnnotations.Add(annotations);
-            }
-
+            var group = (FallsLocationGroup)((object[])e.NewItems.SyncRoot)[0];
+            SetGroupAnnotations(group);
         }
 
 
@@ -200,25 +155,56 @@ namespace FL_Project.ViewModel
 
             foreach (var group in data)
             {
-                if (group.FallsLocationlist != null)
+                SetGroupAnnotations(group);
+            }
+        }
+
+        internal void SetGroupAnnotations(FallsLocationGroup group)
+        {
+            if (group.FallsLocationlist != null)
+            {
+                if (group.FallsLocationlist.Count > 0)
                 {
                     foreach (var item in group.FallsLocationlist)
                     {
                         SetAnnotation("Report", item.Adress, group.GroupColor, group.GruopId);
                     }
                 }
-                if (group.EstimateFallLocation != null)
-                {
-                    SetAnnotation("Estimate", group.EstimateFallLocation.Adress, group.GroupColor, group.GruopId);
-                }
-                if (group.AccurateFallLocation != null)
-                {
-                    SetAnnotation("Accurate", group.AccurateFallLocation.Adress, group.GroupColor, group.GruopId);
-                }
+
+                    group.FallLocationChanged += new Action<FallsLocationGroup,FallLocation>((g,fl) => { SetAnnotation("Report", fl.Adress, g.GroupColor, g.GruopId); });
             }
+            group.EsimateFallLocationChanged += new Action<FallsLocationGroup>((g) =>
+            {
+                //The existing estimate FL  annotaion will change the lat and long.
+                var location = FallLocationService.getLocation(g.EstimateFallLocation.Adress);
+                foreach (var item in DataMapAnnotations)
+                {
+                    if (item.AnnotationSymbol.Uid.Equals("Estimate_" + group.GruopId))
+                    {
+                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                        {
+                            item.Latitude = location[0];
+                            item.Longitude = location[1];
+                        });
+                    }
+                }
+            });
+            if (group.EstimateFallLocation != null)
+            {
+                SetAnnotation("Estimate", group.EstimateFallLocation.Adress, group.GroupColor, group.GruopId);
+            }
+            if (group.AccurateFallLocation != null)
+            {
+                SetAnnotation("Accurate", group.AccurateFallLocation.Adress, group.GroupColor, group.GruopId);
+            }
+            else
+            {
+                group.AccurateFallLocationChanged += new Action<FallsLocationGroup>((g) => { SetAnnotation("Accurate", g.AccurateFallLocation.Adress, g.GroupColor, g.GruopId); });
+            }
+
         }
 
-
+        
 
         internal void SetAnnotation(string type, string adress, string groupColor, string groupId)
         {

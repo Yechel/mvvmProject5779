@@ -11,8 +11,8 @@ namespace FL_Project.ShapesFL
 {
     public static class StarFL
     {
-        public static int SHAPE_SMALL_SIZE = 15;
-        public static int SHAPE_LARGE_SIZE = 17;
+        public static int SHAPE_SMALL_SIZE = 18;
+        public static int SHAPE_LARGE_SIZE = 20;
 
         public static Polygon getStarShape()
         {

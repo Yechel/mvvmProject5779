@@ -102,12 +102,9 @@
     <Compile Include="Converters\GridToFallLocationConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\ToolTipToStringConverter.cs" />
-    <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\AccurateFallLocation.cs" />
-    <Compile Include="Model\DataItem.cs" />
-    <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\FallLocation.cs" />
-    <Compile Include="Model\FallLocationService.cs" />
+    <Compile Include="Service\FallLocationService.cs" />
     <Compile Include="Model\FallsLocationGroup.cs" />
     <Compile Include="ShapesFL\EllipseFL.cs" />
     <Compile Include="ShapesFL\StarFL.cs" />

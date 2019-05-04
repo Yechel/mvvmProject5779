@@ -14,12 +14,21 @@
         <converters:IntToStringConverter x:Key="IntToStringConverter"/>
         <Style x:Key="GridStyle" TargetType="Grid">
             <Setter Property="Background" Value="PowderBlue"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
         <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="3"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="BorderBrush" Value="PowderBlue" />
             <Setter Property="BorderThickness" Value="1.5" />
+        </Style>
+
+        <Style x:Key="MyLableStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="CornflowerBlue"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontStretch" Value="UltraExpanded"/>
         </Style>
     </UserControl.Resources>
 
@@ -45,7 +54,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Add New Fall Location"/>
+                    <Label Style="{StaticResource MyLableStyle}" Content="Add New Fall Location"/>
                     <Grid x:Name="AddNewFallLoctionPropertiesG" Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -78,14 +87,16 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <StackPanel Grid.Row="2" >
+                        <StackPanel Grid.Row="2" Orientation="Horizontal">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Date:" />
-                                <syncfusion:SfDatePicker  x:Name="sfdatePicker"  SetValueOnLostFocus="True"  VerticalAlignment="Center"  HorizontalAlignment="Center" Height="25"  FormatString="dd\/MM\/yy" DropDownHeight="300" DateTime="{Binding NewFallLocationDate,Mode=OneWayToSource}" />
-                            </StackPanel>
+                                <Label Content="Date:" Style="{StaticResource MyLableStyle}" />
+                                    <Border Style="{StaticResource BorderStyle}" CornerRadius="10">
+                                        <syncfusion:SfDatePicker  x:Name="sfdatePicker" BorderBrush="PowderBlue" Background="GhostWhite" Foreground="CornflowerBlue" AccentBrush="PowderBlue" SetValueOnLostFocus="True"  VerticalAlignment="Center"  HorizontalAlignment="Center" Height="25"  FormatString="dd\/MM\/yy" DropDownHeight="300" DateTime="{Binding NewFallLocationDate,Mode=OneWayToSource}" />
+                                    </Border>
+                                </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Time:" />
-                                <syncfusion:SfTimePicker  Grid.Row="2" VerticalAlignment="Center"  SetValueOnLostFocus="True"   FormatString="HH:mm" Height="25" DropDownHeight="300" Value="{Binding NewFallLocationTime,Mode=OneWayToSource }"  />
+                                    <syncfusion:SfTimePicker  Grid.Row="2" VerticalAlignment="Center"  BorderBrush="PowderBlue" Background="GhostWhite" Foreground="CornflowerBlue" AccentBrush="PowderBlue" SetValueOnLostFocus="True"   FormatString="HH:mm" Height="25" DropDownHeight="300" Value="{Binding NewFallLocationTime,Mode=OneWayToSource }"  />
                             </StackPanel>
                         </StackPanel>
                     </Grid>

@@ -10,8 +10,8 @@ namespace FL_Project.ShapesFL
 {
   static  class  EllipseFL
     {
-        public static  int SHAPE_SMALL_SIZE = 12;
-        public static int SHAPE_LARGE_SIZE = 14;
+        public static  int SHAPE_SMALL_SIZE = 15;
+        public static int SHAPE_LARGE_SIZE = 17;
         public static Ellipse getEllipse(string color)
         {
 

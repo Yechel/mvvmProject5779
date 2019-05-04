@@ -22,60 +22,20 @@
         <converters:FloatToStingConverter x:Key="FloatToStringConverter" />
     </UserControl.Resources>
     <Grid  x:Name="Root" DataContext="{Binding AnalyzeVM, Source={StaticResource Locator}}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
             <Grid Background="#FFF1C895" />
-            <Grid Grid.Row="1" Background="#FFA2F195">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1.5*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Label Content="filters:"/>
-
-                <DockPanel LastChildFill="False" Grid.Row="1">
-
-                    <Button DockPanel.Dock="Left" Content="aaa" />
-                    <Button DockPanel.Dock="Left" Content="bbb" />
-                </DockPanel>
-                <CheckBox x:Name="SelectAllCB" Grid.Row="3" Content="All"/>
-                <CheckBox x:Name="SelectAccurateCB"  Grid.Row="4" Content="Accurate"/>
-                <CheckBox x:Name="SelectEstimateCB"  Grid.Row="5" Content="Estimate"/>
-                <CheckBox x:Name="SelectReportedCB"  Grid.Row="6" Content="Reported"/>
-
+            <Grid Grid.Column="0" Background="#FFA2F195">
+                
             </Grid>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <!--<Grid x:Name="PieChartGrid"  Grid.Column="1">
-                <lvc:PieChart InnerRadius="100" LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}">
-                    <lvc:PieChart.Series>
-                        <lvc:PieSeries x:Name="L1" Title="Maria" Values="3" DataLabels="True"
-                               LabelPoint="{Binding  PointLabel}"/>
-                        <lvc:PieSeries  x:Name="L2" Title="Charles" Values="4" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                        <lvc:PieSeries x:Name="L3" Title="Frida" Values="6" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                        <lvc:PieSeries x:Name="L4" Title="Frederic" Values="2" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                    </lvc:PieChart.Series>
-                </lvc:PieChart>
-            </Grid>-->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="9*"/>
@@ -116,6 +76,26 @@
 
 
             </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            
+
+            <!--<Grid x:Name="PieChartGrid"  Grid.Column="1">
+                <lvc:PieChart InnerRadius="100" LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}">
+                    <lvc:PieChart.Series>
+                        <lvc:PieSeries x:Name="L1" Title="Maria" Values="3" DataLabels="True"
+                               LabelPoint="{Binding  PointLabel}"/>
+                        <lvc:PieSeries  x:Name="L2" Title="Charles" Values="4" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                        <lvc:PieSeries x:Name="L3" Title="Frida" Values="6" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                        <lvc:PieSeries x:Name="L4" Title="Frederic" Values="2" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                    </lvc:PieChart.Series>
+                </lvc:PieChart>
+            </Grid>-->
+
+            <syncfusion:CarouselPanel></syncfusion:CarouselPanel>
         </Grid>
 
 

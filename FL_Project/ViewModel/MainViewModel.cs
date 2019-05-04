@@ -28,6 +28,7 @@ namespace FL_Project.ViewModel
         private ViewModelBase _currentViewModel;
         private CallCenterViewModle _callCenterViewModel;
         private AnalyzeViewModle _analyzeViewModel;
+        private MapViewModle _mapViewModel;
 
         public ICommand CallCenterViewCommand { get; private set; }
         public ICommand AnalyzeViewCommand { get; private set; }
@@ -48,6 +49,22 @@ namespace FL_Project.ViewModel
                 RaisePropertyChanged("CurrentViewModel");
             }
         }
+
+        public MapViewModle MapViewModel
+        {
+            get
+            {
+                return _mapViewModel;
+            }
+      /*      set
+            {
+                if (_mapViewModel == value)
+                    return;
+                _mapViewModel = value;
+                RaisePropertyChanged("MapViewModel");
+            }*/
+        }
+
         public ObservableCollection<FallLocation> ListFL
         {
             get => listFL;
@@ -116,9 +133,10 @@ namespace FL_Project.ViewModel
             _analyzeViewModel = new AnalyzeViewModle();
             _currentViewModel = _callCenterViewModel;
 
+            _mapViewModel = new MapViewModle();
 
 
-            CallCenterViewCommand = new RelayCommand(ExecuteCallCenterViewCommand);
+        CallCenterViewCommand = new RelayCommand(ExecuteCallCenterViewCommand);
             AnalyzeViewCommand = new RelayCommand(ExecuteAnalyzeViewCommand);
             HideAllSimpleFallLocationCommand = new RelayCommand(HideAllSimpleFallLocationMethod);
 

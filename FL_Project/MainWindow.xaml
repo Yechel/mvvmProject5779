@@ -68,7 +68,7 @@
             </Expander.Header>
             <DockPanel DockPanel.Dock="Left"  LastChildFill="True">
                 <DockPanel DockPanel.Dock="Top" LastChildFill="False" >
-                    <ToggleButton x:Name="CallCenterB"  Content="Call Center" Style="{StaticResource ToggeleButtonStyle}"  DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding CallCenterViewCommand}" Margin="5,10" />
+                    <ToggleButton x:Name="CallCenterB"  Content="Call Center" IsChecked="True" Style="{StaticResource ToggeleButtonStyle}"  DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding CallCenterViewCommand}" Margin="5,10" />
                     <ToggleButton x:Name="AnalyzeB" Content="Analyze" Style="{StaticResource ToggeleButtonStyle}" DockPanel.Dock="Left" Width="105" Height="25" Command="{Binding AnalyzeViewCommand}" Margin="5,10"  />
                 </DockPanel>
                 <Grid DockPanel.Dock="Bottom" MinWidth="650"  >

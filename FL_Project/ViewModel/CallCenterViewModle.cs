@@ -145,7 +145,7 @@ namespace FL_Project.ViewModel
             {
                 DateTime dateTime = new DateTime(NewFallLocationDate.Year, NewFallLocationDate.Month, NewFallLocationDate.Day, NewFallLocationTime.Hour, NewFallLocationTime.Minute, 00);
                 FallLocation fl = new FallLocation(NewFallLocationAdress, (dateTime).ToString("MM/dd/yyyy hh:mm"), NewFallLocationNumberOfFalls);
-                FallLocationService.addFL(fl);
+                FallLocationService.AddFL(fl);
                 Messenger.Default.Send<NotificationMessage>(new NotificationMessage("New FL added."));
             }
         }
@@ -158,7 +158,7 @@ namespace FL_Project.ViewModel
             Action succsess = () => { Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Acuurate FL added.")); };
             Action fail = () => { Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Acuurate FL fail to add.")); };
             AccurateFallLocation afl = new AccurateFallLocation((dateTime).ToString("MM/dd/yyyy hh:mm"), PicPath,succsess,fail);
-            FallLocationService.addAFL(afl);
+            FallLocationService.AddAFL(afl);
         }
 
       
