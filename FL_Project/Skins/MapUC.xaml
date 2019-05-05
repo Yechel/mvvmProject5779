@@ -127,7 +127,7 @@
                                 <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
                             </syncfusion:MapAnnotations.AnnotationSymbol >
                         </syncfusion:MapAnnotations>
-                        <syncfusion:MapAnnotations Latitude="30.615099" Longitude="35.182879"   AnnotationLabel="אריאל" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
+                        <syncfusion:MapAnnotations Latitude="30.602920" Longitude="34.806712"   AnnotationLabel="מצפה רמון" AnnotationLabelFontFamily="Times New Roman" AnnotationLabelFontSize="15" AnnotationLabelFontStyle="Oblique" AnnotationLabelForeground="Black" >
                             <syncfusion:MapAnnotations.AnnotationSymbol >
                                 <Polygon Fill="BlueViolet" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="10" Height="10" Stretch="Fill" Points="0,5 5,0 10,5 5,10"  />
                             </syncfusion:MapAnnotations.AnnotationSymbol >

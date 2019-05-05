@@ -36,9 +36,10 @@ namespace FL_Project.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CallCenterViewModle>();
-            SimpleIoc.Default.Register<AnalyzeViewModle>();
             SimpleIoc.Default.Register<MapViewModle>();
+            SimpleIoc.Default.Register<AnalyzeViewModle>();
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
+            
         }
 
         public MainViewModel MainViewModel

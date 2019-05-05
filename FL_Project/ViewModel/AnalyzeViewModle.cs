@@ -71,12 +71,12 @@ namespace FL_Project.ViewModel
            // UpdateMaxDistance();
             UpdateDiagramPresentageCommand = new RelayCommand( UpdateDiagramPresentageMethod);
             listOfImages = new List<Image>();
-            foreach (var item in FallLocationService.GetData((a)=> { }))
+            var data = FallLocationService.GetData((a) => { });
+            foreach (var item in data)
             {
                 setImageToListImage(item);
-               
             }
-            FallLocationService.GetData((a) => { }).CollectionChanged += AnalyzeViewModle_CollectionChanged;
+           // FallLocationService.GetData((a) => { }).CollectionChanged += AnalyzeViewModle_CollectionChanged;
 
 
 

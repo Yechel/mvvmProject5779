@@ -50,22 +50,14 @@ namespace FL_Project.Skins
                 {
                     foreach (var item in instance.ListOfImages)
                     {
-                   /*     Viewbox vb = new Viewbox();
+                       Viewbox vb = new Viewbox();
                         vb.Child = item;
                         AFLCarusel.Items.Add(new CarouselItem() { Content = vb });
-                        */
-
-
-                        AFLCarusel.Items.Add(item);
+                        
+                       // AFLCarusel.Items.Add(item);
                     }
                 }
             });
-
-           
-           
-
-
-
             Root.IsEnabled = true;
         }
        

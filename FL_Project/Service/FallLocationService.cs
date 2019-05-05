@@ -12,7 +12,7 @@ namespace FL_Project.Model
     static class FallLocationService
     {
         public static Action DataChanged;
-    //    public static Action NewFLAdded;
+    //public static Action NewFLAdded;
       //  public static Action EstimateFlChanged;
         //public static Action NewAFLAdded;
 
@@ -97,8 +97,8 @@ namespace FL_Project.Model
 
 
                     });
-                    task.Start();
-                    while (task.Status == TaskStatus.Running)
+                   task.Start();
+                   while (task.Status == TaskStatus.Running)
                     { Thread.Sleep(100); }
                     callback(isSucceded);
                     return ref FallLocationData;
@@ -143,6 +143,24 @@ namespace FL_Project.Model
 
         private static List<FallLocation> getDummyList()
         {
+            BL.BL_imp bl = new BL.BL_imp();
+            var newReportToAdd = new BE.Report
+            {
+                Id = 1111,
+                Report_Id =111111,
+                Time = new DateTime(1,1,1),
+                Name = "1",
+                Report_Adress ="1",
+                Boom_count =2,
+                ImagePath ="2",
+                lat = 1,
+                log = 1
+            };
+        //    var i = bl.getDropsList();
+     //       var i =  bl.getReportList();
+            bl.AddReport(newReportToAdd);
+
+
             List<FallLocation> fallLocations = new List<FallLocation>();
 
             AccurateFallLocation afallLocation1 = new AccurateFallLocation(12, "בר יוחאי 10, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 25, 00)).ToString("MM/dd/yyyy hh:mm"),1, @"C:\Users\יחיאל\Source\Repos\FL_Project\FL_Project\afl_pics\AFL_17.jpg");
