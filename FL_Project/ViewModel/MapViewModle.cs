@@ -231,7 +231,7 @@ namespace FL_Project.ViewModel
                         throw new Exception("Unknown Type");
                 }
                 annotations.AnnotationSymbol = shape;
-                annotations.AnnotationSymbol.Uid = type + "_" + groupId;
+                annotations.AnnotationSymbol.Uid = type + "_" + groupId+ "_" + adress;
                 DataMapAnnotations.Add(annotations);
             });
         }

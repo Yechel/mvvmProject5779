@@ -95,7 +95,29 @@
                 </lvc:PieChart>
             </Grid>-->
 
-            <syncfusion:CarouselPanel></syncfusion:CarouselPanel>
+            <syncfusion:Carousel x:Name="AFLCarusel"  RadiusX = "220" RadiusY ="-100" ScaleFraction = "0.60" >
+          <!--      <syncfusion:CarouselItem>
+                    <syncfusion:CarouselItem.Content>
+                        <Viewbox Height="100" Width="100">
+                            <Image Source="Images/King.png"/>
+                        </Viewbox>
+                    </syncfusion:CarouselItem.Content>
+                </syncfusion:CarouselItem>
+                <syncfusion:CarouselItem>
+                    <syncfusion:CarouselItem.Content>
+                        <Viewbox Height="100" Width="100">
+                            <Image Source="Images/King.png"/>
+                        </Viewbox>
+                    </syncfusion:CarouselItem.Content>
+                </syncfusion:CarouselItem>
+                <syncfusion:CarouselItem>
+		<syncfusion:CarouselItem.Content>
+			<Viewbox Height="100" Width="100">
+				<Image Source="Images/King.png"/>
+    		</Viewbox>
+		</syncfusion:CarouselItem.Content>
+	</syncfusion:CarouselItem>-->
+            </syncfusion:Carousel>
         </Grid>
 
 

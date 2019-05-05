@@ -54,7 +54,7 @@ namespace FL_Project.Skins
         item.AnnotationSymbol.MouseDown += Shape_MouseDown;
         item.AnnotationSymbol.MouseUp += AnnotationSymbol_MouseUp;
         SFL.Annotations.Add(item);
-    }
+        }
 
 
 

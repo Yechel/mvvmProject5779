@@ -16,6 +16,10 @@ using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Wpf;
 using FL_Project.Model;
+using Syncfusion.Windows.Shared;
+using GalaSoft.MvvmLight.Ioc;
+using FL_Project.ViewModel;
+using GalaSoft.MvvmLight.Threading;
 
 namespace FL_Project.Skins
 {
@@ -25,15 +29,41 @@ namespace FL_Project.Skins
     public partial class AnalyzeUC : UserControl
     {
         ToolTip ToolTip1 { get; set; }
+        AnalyzeViewModle instance;
 
         public AnalyzeUC()
         {
             InitializeComponent();
             Root.IsEnabled = false;
-          /*  var distance = FallLocationService.getListOfDistance().ToArray();
-            DistanceDiagramSlider.SelectionStart = distance[0];
-            DistanceDiagramSlider.SelectionEnd = distance[distance.Length - 1];*/
- 
+            /*  var distance = FallLocationService.getListOfDistance().ToArray();
+              DistanceDiagramSlider.SelectionStart = distance[0];
+              DistanceDiagramSlider.SelectionEnd = distance[distance.Length - 1];*/
+
+            //   var i = carusel.Children.Count;
+
+
+
+            instance = SimpleIoc.Default.GetInstance<AnalyzeViewModle>();
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                if (instance != null)
+                {
+                    foreach (var item in instance.ListOfImages)
+                    {
+                   /*     Viewbox vb = new Viewbox();
+                        vb.Child = item;
+                        AFLCarusel.Items.Add(new CarouselItem() { Content = vb });
+                        */
+
+
+                        AFLCarusel.Items.Add(item);
+                    }
+                }
+            });
+
+           
+           
+
 
 
             Root.IsEnabled = true;

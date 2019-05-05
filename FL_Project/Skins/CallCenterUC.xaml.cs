@@ -125,7 +125,8 @@ namespace FL_Project.Skins
 
         private void DropList_DragLeave(object sender, DragEventArgs e)
         {
-            AccurateFLCnvs.Background = new SolidColorBrush(Colors.LightGray);
+            AccurateFLCnvs.Background = new SolidColorBrush(Colors.White);
+            DragPicTB.Visibility = Visibility.Visible;
         }
 
         private void DropList_Drop(object sender, DragEventArgs e)
@@ -160,8 +161,9 @@ namespace FL_Project.Skins
 
         private void RemoveB_Click(object sender, RoutedEventArgs e)
         {
-            AccurateFLCnvs.Background = new SolidColorBrush(Colors.LightGray);
+            AccurateFLCnvs.Background = new SolidColorBrush(Colors.White);
             RemoveB.Visibility = Visibility.Hidden;
+            DragPicTB.Visibility = Visibility.Visible;
             PicPathV.Content = "";
         }
 

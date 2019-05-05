@@ -89,7 +89,7 @@ namespace FL_Project.Model
                        
                             isSucceded = true;
                         }
-                        catch
+                        catch (Exception e)
                         {
                             isSucceded = false;
 
@@ -145,7 +145,7 @@ namespace FL_Project.Model
         {
             List<FallLocation> fallLocations = new List<FallLocation>();
 
-            AccurateFallLocation afallLocation1 = new AccurateFallLocation(12, "בר יוחאי 10, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 25, 00)).ToString("MM/dd/yyyy hh:mm"),1, "C:\\User\\יחיאל\\Source\\Repos\\FL_Project\\FL_Project\\afl_pics\\1.jpg");
+            AccurateFallLocation afallLocation1 = new AccurateFallLocation(12, "בר יוחאי 10, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 25, 00)).ToString("MM/dd/yyyy hh:mm"),1, @"C:\Users\יחיאל\Source\Repos\FL_Project\FL_Project\afl_pics\AFL_17.jpg");
             fallLocations.Add(afallLocation1);
             FallLocation fallLocation1 = new FallLocation("בר יוחאי 10, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 25, 00)).ToString("MM/dd/yyyy hh:mm"), 2);
             FallLocation fallLocation2 = new FallLocation("בר יוחאי 11, שדרות, ישראל", (new DateTime(2018, 12, 1, 19, 26, 00)).ToString("MM/dd/yyyy hh:mm"), 2);
@@ -184,8 +184,10 @@ namespace FL_Project.Model
             }
             if (!isAdded)
             {
-                FallsLocationGroup flg = new FallsLocationGroup(key);
-                flg.AccurateFallLocation = afl;
+                FallsLocationGroup flg = new FallsLocationGroup(key)
+                {
+                    AccurateFallLocation = afl
+                };
                 FallLocationData.Add(flg);
             }
             if (DataChanged != null)
