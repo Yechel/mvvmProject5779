@@ -112,6 +112,7 @@
     <Compile Include="Converters\ToolTipToStringConverter.cs" />
     <Compile Include="Model\AccurateFallLocation.cs" />
     <Compile Include="Model\FallLocation.cs" />
+    <Compile Include="Service\Class1.cs" />
     <Compile Include="Service\FallLocationService.cs" />
     <Compile Include="Model\FallsLocationGroup.cs" />
     <Compile Include="ShapesFL\EllipseFL.cs" />

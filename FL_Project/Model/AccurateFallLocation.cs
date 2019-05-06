@@ -23,7 +23,7 @@ namespace FL_Project.Model
             PicPath = afl.picPath;
         }
 
-        public AccurateFallLocation(string date, string picPat, Action sucsess, Action fail)
+        public AccurateFallLocation(string date, string picPath, Action sucsess, Action fail)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace FL_Project.Model
                 NumberOfFalls = 1;
                 string destinationFile = Settings.Default.PicPathLocation;
                 destinationFile = System.IO.Path.Combine(destinationFile,"AFL_"+ ID + ".jpg");
-                System.IO.File.Copy(picPat, destinationFile, true);
+                System.IO.File.Copy(picPath, destinationFile, true);
                 Adress = FallLocationService.GetAdressFromPath(picPath);
                 PicPath = picPath;
                 sucsess();

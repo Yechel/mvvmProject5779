@@ -154,6 +154,7 @@ namespace FL_Project.ViewModel
 
         private void AddNewAccurateFLMethod(object obj)
         {
+            string str = obj as String;
             DateTime dateTime = new DateTime(NewFallLocationDate.Year, NewFallLocationDate.Month, NewFallLocationDate.Day, NewFallLocationTime.Hour, NewFallLocationTime.Minute, 00);
             Action succsess = () => { Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Acuurate FL added.")); };
             Action fail = () => { Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Acuurate FL fail to add.")); };

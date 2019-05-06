@@ -290,7 +290,6 @@
                                             <!-- <StackPanel Visibility="{Binding  CallCenterVM.SelectedVisible,  Source={StaticResource Locator}  ,Mode=TwoWay}">-->
                                                 <Grid >
                                                     <Button Content="{Binding Adress}" Style="{StaticResource ButtonStyle}"  Padding="5,0,20,0"/>
-                                                    <Ellipse Fill="{Binding GroupColor}"  Height="15" Width="15"/>
                                                 </Grid>
                                             </DataTemplate>
                                     </ListBox.ItemTemplate>
