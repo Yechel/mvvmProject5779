@@ -23,7 +23,7 @@ namespace BL
         //
        double[] GetCoordinate(string address);//צריך לממש ולהחזיר LAT LOG
         //
-       void GetCoordinateFromExif(string imagePath);//צריך לממש ולהחזיר LAT LOG
+       double[] GetCoordinateFromExif(string imagePath);//צריך לממש ולהחזיר LAT LOG
 
         //more functions
         #region helpFunctions

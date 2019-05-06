@@ -70,7 +70,10 @@ namespace BL
         {
             double let=0;
             double log=0;
-         
+            if (address == null)
+            {
+                return new double[] { 0,0};
+            }
             Task task = new Task(async () =>
                {
                    var Coordinate =await ApiAdressToCoordinate.GetGeoCoordinateAsync(address);
@@ -127,13 +130,13 @@ namespace BL
     //get address and return location (lat and long) return null if not success
     public double[] getLatAndLong(string adress)
         {
-            double[] latLong = new double[2];
+            double[] latLong = GetCoordinate(adress);
             return latLong;
         }
 
-        public void GetCoordinateFromExif(string imagePath)
+        public double[] GetCoordinateFromExif(string imagePath)
         {
-            var img = ExifImageTo_Lat_Log.GetLatLongFromImage(imagePath);
+            return  ExifImageTo_Lat_Log.GetLatLongFromImage(imagePath);
         }
         //#region 
         //public double[][] UseKmeans(List<Report> reports)
@@ -487,6 +490,7 @@ namespace BL
         //return list of all the AccurateDrops from DataSource
         public List<Drop> getAccurateDropList()
         {
+            return dal.getDropList();
             ////////////////////////////
             ////////////////////////////code for altering the drop table.i can run it once and it should be enough.
             ////////////////////////////
@@ -511,7 +515,7 @@ namespace BL
        public List<Drop> CalculateEstimateDrop(List<Report> report_list)
         {
 
-            int numOfClusters = 3;
+            int numOfClusters = 1;
             double[][] rawData = new double[report_list.Count()][];
             //inistiate the array
             for (int i = 0; i < report_list.Count(); i++)
