@@ -76,7 +76,10 @@ namespace FL_Project.ViewModel
             {
                 setImageToListImage(item);
             }
-           // FallLocationService.GetData((a) => { }).CollectionChanged += AnalyzeViewModle_CollectionChanged;
+            
+
+
+
 
 
 
@@ -89,6 +92,7 @@ namespace FL_Project.ViewModel
                 Image img = new Image();
                 var uriSource = new Uri(item.AccurateFallLocation.PicPath);
                 img.Source = new BitmapImage(uriSource);
+                img.Uid = item.GruopId;
                 ListOfImages.Add(img);
             }
         }

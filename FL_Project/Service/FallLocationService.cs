@@ -143,22 +143,10 @@ namespace FL_Project.Model
 
         private static List<FallLocation> getDummyList()
         {
-            BL.BL_imp bl = new BL.BL_imp();
-            var newReportToAdd = new BE.Report
-            {
-                Id = 1111,
-                Report_Id =111111,
-                Time = new DateTime(1,1,1),
-                Name = "1",
-                Report_Adress ="1",
-                Boom_count =2,
-                ImagePath ="2",
-                lat = 1,
-                log = 1
-            };
+           
         //    var i = bl.getDropsList();
      //       var i =  bl.getReportList();
-            bl.AddReport(newReportToAdd);
+           
 
 
             List<FallLocation> fallLocations = new List<FallLocation>();

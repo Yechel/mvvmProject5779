@@ -165,7 +165,7 @@ namespace DAL
 
                     var newReportToAdd = new Report
                     {
-                        Id = report.Id,
+                        Id = 1,
                         Report_Id = report.Report_Id,
                         Time = report.Time,
                         Name = report.Name,
@@ -175,14 +175,14 @@ namespace DAL
                         lat = report.lat,
                         log = report.log
                     };
-
-
                     db.Reports.Add(newReportToAdd);
                     db.SaveChanges();
+
+
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

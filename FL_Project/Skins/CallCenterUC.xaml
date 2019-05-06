@@ -22,9 +22,27 @@
             <Setter Property="BorderBrush" Value="PowderBlue" />
             <Setter Property="BorderThickness" Value="1.5" />
         </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderBrush" Value="PowderBlue" />
+            <Setter Property="BorderThickness" Value="1.5" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="GhostWhite" />
+            <Setter Property="Foreground" Value="RoyalBlue"/>
+       
+        </Style>
+       
+
+        <Style x:Key="BorderStyle1" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderBrush" Value="CadetBlue" />
+            <Setter Property="BorderThickness" Value="1.5" />
+        </Style>
 
         <Style x:Key="MyLableStyle" TargetType="Label">
-            <Setter Property="Foreground" Value="CornflowerBlue"/>
+            <Setter Property="Foreground" Value="RoyalBlue"/>
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -32,12 +50,14 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="MyLableStyle1" TargetType="Label">
-            <Setter Property="Foreground" Value="CornflowerBlue"/>
+            <Setter Property="Foreground" Value="RoyalBlue"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontStretch" Value="UltraExpanded"/>
         </Style>
+       
+
     </UserControl.Resources>
 
 
@@ -52,7 +72,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Border Style="{StaticResource BorderStyle}">
+            <Border Style="{StaticResource BorderStyle1}" >
                 <Grid Name="NewFL_G" Grid.Row="0">
                     <Grid Style="{StaticResource GridStyle}">
 
@@ -62,7 +82,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Style="{StaticResource MyLableStyle}" Content="Add New Fall Location"/>
-                        <Border Grid.Row="1" Margin="5,0,5,10" Style="{StaticResource BorderStyle}" BorderBrush="AliceBlue">
+                        <Border Grid.Row="1" Margin="5,0,5,10" Style="{StaticResource BorderStyle1}"  >
                             <Grid Background="AliceBlue">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="5*"/>
@@ -116,7 +136,7 @@
 
                                 <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
                                     <Grid>
-                                        <Button  Content="Add"  Command="{Binding AddNewFallCommand}" Background="PowderBlue" BorderBrush="PowderBlue" Foreground="CornflowerBlue" FontSize="14" FontWeight="Bold"/>
+                                        <Button  Content="Add"  Command="{Binding AddNewFallCommand}"  Background="PowderBlue" BorderBrush="PowderBlue" Foreground="RoyalBlue" FontSize="14" FontWeight="Bold"/>
                                     </Grid>
                                 </Border>
 
@@ -127,14 +147,14 @@
 
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
+            <Border Grid.Row="1" Style="{StaticResource BorderStyle1}">
                 <Grid x:Name="NewAFL_G" Style="{StaticResource GridStyle}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="6*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Style="{StaticResource MyLableStyle}" Content="New Accurate Fall Location"/>
-                    <Border Grid.Row="1" Margin="5,0,5,10" Style="{StaticResource BorderStyle}" BorderBrush="AliceBlue">
+                    <Border Grid.Row="1" Margin="5,0,5,10" Style="{StaticResource BorderStyle1}" >
                         <Grid Background="AliceBlue">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.1*"/>
@@ -142,8 +162,7 @@
                                 <RowDefinition Height="1.5*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-
-                            <Canvas x:Name="AccurateFLCnvs" Background="White" Grid.Row="1" AllowDrop="True" Drop="DropList_Drop" DragEnter="DropList_DragEnter" DragLeave="DropList_DragLeave" Margin="10,5">
+                            <Canvas x:Name="AccurateFLCnvs" Background="White" Grid.Row="1" AllowDrop="True" Drop="DropList_Drop" DragEnter="DropList_DragEnter" DragLeave="DropList_DragLeave" Margin="10,5" >
                                 <Canvas.Triggers>
                                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
 
@@ -185,7 +204,7 @@
                             </StackPanel>
                             <Border Grid.Row="3" Style="{StaticResource BorderStyle}">
                                 <Grid>
-                                    <Button  Content="Add"  Command="{Binding AddNewAccurateFallCommand}"  CommandParameter="{Binding ElementName=PicPathV, Path=Content}"  Background="PowderBlue" BorderBrush="PowderBlue" Foreground="CornflowerBlue" FontSize="14" FontWeight="Bold"/>
+                                    <Button  Content="Add"  Command="{Binding AddNewAccurateFallCommand}"  CommandParameter="{Binding ElementName=PicPathV, Path=Content}"  Background="PowderBlue" BorderBrush="PowderBlue" Foreground="RoyalBlue" FontSize="14" FontWeight="Bold"/>
                                 </Grid>
                             </Border>
                             <Label x:Name="PicPathV" Content="{Binding PicPath, Mode=OneWayToSource}" Visibility="Hidden"/>
@@ -199,12 +218,13 @@
 
         </Grid>
 
-        <Border  Grid.Column="2" Style="{StaticResource BorderStyle}">
+        <Border  Grid.Column="2" Style="{StaticResource BorderStyle1}">
             <Grid>
 
-                <ListBox x:Name="FallsListLB" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ListOfGruops}" >
+                <ListBox x:Name="FallsListLB" Background="PowderBlue" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ListOfGruops}" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
+                            <Border  Margin="5,2.5,5,2.5" BorderBrush="AliceBlue" Style="{StaticResource BorderStyle}">
                             <Grid Background="{Binding  GroupColor}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
@@ -212,28 +232,71 @@
                                     <RowDefinition Height="5*" />
                                 </Grid.RowDefinitions>
 
-                                <Label Content="{Binding GruopId}"/>
+                                    <Label Content="{Binding GruopId}" Foreground="Blue" FontSize="15" FontWeight="DemiBold"/>
                                 <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Content="{Binding EstimateFallLocation.Adress}" Height="30"/>
-                                    <Button Grid.Column="1" Content="{Binding AccurateFallLocation.Adress}"/>
-                                </Grid>
-                                <ListBox Grid.Row="2" ItemsSource="{Binding FallsLocationlist}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <!-- <StackPanel Visibility="{Binding  CallCenterVM.SelectedVisible,  Source={StaticResource Locator}  ,Mode=TwoWay}">-->
-                                            <StackPanel >
-                                                <CheckBox x:Name="cb"  IsChecked="True"></CheckBox>
-                                                <Button Content="{Binding Adress}"  />
-                                            </StackPanel>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                            <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Button x:Name="EstimateFLButton" Content="{Binding EstimateFallLocation.Adress}" Padding="2,0,20,0">
+                                                <Button.Style>
+                                                    <Style TargetType="{x:Type Button}">
+                                                        <Setter Property="Margin" Value="10,2"/>
+                                                        <Setter Property="BorderBrush" Value="PowderBlue" />
+                                                        <Setter Property="BorderThickness" Value="1.5" />
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                        <Setter Property="FontSize" Value="15"/>
+                                                        <Setter Property="Background" Value="GhostWhite" />
+                                                        <Setter Property="Foreground" Value="RoyalBlue"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="Content" Value="{x:Null}">
+                                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <Ellipse  Fill="{Binding GroupColor}" Height="13" Width="13" Stroke="Black" Margin="0,0,15,0"  HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Grid.Row="1">
+                                            <Button  Content="{Binding AccurateFallLocation.Adress}">
+                                                <Button.Style>
+                                                    <Style TargetType="{x:Type Button}">
+                                                        <Setter Property="Margin" Value="10,2"/>
+                                                        <Setter Property="Margin" Value="10,2"/>
+                                                        <Setter Property="BorderBrush" Value="PowderBlue" />
+                                                        <Setter Property="BorderThickness" Value="1.5" />
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                        <Setter Property="FontSize" Value="15"/>
+                                                        <Setter Property="Background" Value="GhostWhite" />
+                                                        <Setter Property="Foreground" Value="RoyalBlue"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="Content" Value="{x:Null}">
+                                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
 
-                                        </DataTemplate>
+                                            </Button>
+                                            <Polygon   Fill="{Binding GroupColor}" Stroke="Black" StrokeThickness=".5" StrokeLineJoin="Round" Width="15" Height="15" Stretch="Fill" Points="10,2 10,7 17,7 12,10 14,15 9,12 4,15 6,10 1,7 7,7" Name="star" Margin="0,0,15,0"  HorizontalAlignment="Right"/>
+
+                                        </Grid>
+                                    </Grid>
+                                <ListBox Opacity="0.8" Grid.Row="2" ItemsSource="{Binding FallsLocationlist}">
+                                    <ListBox.ItemTemplate >
+                                        <DataTemplate >
+                                            <!-- <StackPanel Visibility="{Binding  CallCenterVM.SelectedVisible,  Source={StaticResource Locator}  ,Mode=TwoWay}">-->
+                                                <Grid >
+                                                    <Button Content="{Binding Adress}" Style="{StaticResource ButtonStyle}"  Padding="5,0,20,0"/>
+                                                    <Ellipse Fill="{Binding GroupColor}"  Height="15" Width="15"/>
+                                                </Grid>
+                                            </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </Grid>
+                            </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

@@ -39,7 +39,23 @@ namespace FL_Project.ViewModel
             SimpleIoc.Default.Register<MapViewModle>();
             SimpleIoc.Default.Register<AnalyzeViewModle>();
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
-            
+          /*  BL.BL_imp bl = new BL.BL_imp();
+            var newReportToAdd = new BE.Report
+            {
+               
+                Report_Id = 111111,
+                Time = new DateTime(1, 1, 1),
+                Name = "1",
+                Report_Adress = "1",
+                Boom_count = 2,
+                ImagePath = "2",
+                lat = 1,
+                log = 1
+            };
+            bl.AddReport(newReportToAdd);
+            var i = bl.getReportList();
+            int test = 0;*/
+
         }
 
         public MainViewModel MainViewModel

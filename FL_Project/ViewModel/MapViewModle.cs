@@ -48,6 +48,11 @@ namespace FL_Project.ViewModel
             var data = FallLocationService.GetData((a) => { });
             //register to new group that added
            data.CollectionChanged += MapViewModle_CollectionChanged;
+            if (DataMapAnnotations != null && DataMapAnnotations.Count > 0)
+            {
+                CurrentMapAnnotations = DataMapAnnotations[0];
+            }
+            
             /*    foreach (var group in data)
              {
                  //register to new Estimate accurate and reported fallLocation that added

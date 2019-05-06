@@ -48,17 +48,25 @@ namespace FL_Project.Skins
             {
                 if (instance != null)
                 {
-                    foreach (var item in instance.ListOfImages)
+
+                  foreach (var item in instance.ListOfImages)
                     {
+                     
                        Viewbox vb = new Viewbox();
+                        if (item.Parent != null)
+                        {
+                            var element = item as FrameworkElement;
+                            var ParentPanelCollection = (element.Parent as Panel).Children as UIElementCollection;
+                            ParentPanelCollection.Clear();
+                        }
                         vb.Child = item;
                         AFLCarusel.Items.Add(new CarouselItem() { Content = vb });
-                        
                        // AFLCarusel.Items.Add(item);
                     }
                 }
             });
             Root.IsEnabled = true;
+            
         }
        
 
