@@ -31,17 +31,21 @@ namespace FL_Project.Model
             FallLocation fl = new FallLocation();
             fl.Adress = r.Report_Adress;
             fl.Date = r.Time.ToString();
-            fl.ID = r.Report_Id;                          //צריך לבדוק ID או REOPRT_ID
+            fl.ID = r.Report_Id;                         
             fl.NumberOfFalls = r.Boom_count;
             return fl;
         }
 
         public static Report FlToReport(FallLocation fl)
         {
+            DateTime enteredDate = DateTime.Parse(fl.Date);
+            double[] latLog = bl.GetCoordinate(fl.Adress);
+
             Report r = new Report();
+            r.lat = latLog[0];
+            r.log = latLog[1];
             r.Report_Adress = fl.Adress;
-            //////////////TODO
-            //r.Time = fl.Date;                              //המרה מSTRING  לDATETIME
+            r.Time = enteredDate;                           
             r.Report_Id = fl.ID;
             r.Boom_count = fl.NumberOfFalls;
             return r;
@@ -57,6 +61,17 @@ namespace FL_Project.Model
             }
             return fl;
         }
+
+        public static List<Report> ListOfFallLocationToReports(List<FallLocation> fls)
+        {
+            List<Report> rprtLst = new List<Report>();
+            for (int i = 0; i < fls.Count; i++)
+            {
+                rprtLst.Add(FlToReport(fls[i]));
+            }
+            return rprtLst;
+        }
+
 
         public static ref ObservableCollection<FallsLocationGroup> GetData(Action<bool> callback)
         {
@@ -149,7 +164,14 @@ namespace FL_Project.Model
         //TODO: implement this with  ניתוח אשכולות
         internal static FallLocation EstimateFallLocation(ObservableCollection<FallLocation> fallsLocationlist)
         {
-            return fallsLocationlist.First();
+            List<FallLocation> flList = new List<FallLocation>(fallsLocationlist);
+           List<Drop> res= bl.CalculateEstimateDrop(ListOfFallLocationToReports(flList));
+            FallLocation fl = new FallLocation();
+            fl.Adress = res.First().Drop_Adress;
+            fl.Date = res.First().Drop_time.ToString();
+            fl.ID = res.First().Drop_Id;                          //צריך לבדוק ID או REOPRT_ID
+            fl.NumberOfFalls = 1; //logically correct
+            return fl;
         }
 
        
@@ -158,17 +180,18 @@ namespace FL_Project.Model
         private static double movement = 0;
         internal static double[] getLocation(string adress)
         {
-            double d1 = 31.76367679378092 + movement;
-            double d2 = 35.22701968033334 + movement;
-            movement = movement + 0.01111;
-            double[] d = { d1, d2 };
-            return d;
+            return bl.GetCoordinate(adress);
+            //double d1 = 31.76367679378092 + movement;
+            //double d2 = 35.22701968033334 + movement;
+            //movement = movement + 0.01111;
+            //double[] d = { d1, d2 };
+            //return d;
         }
 
         internal static string GetAdressFromPath(string picPath)
         {
             //TODO: add this function
-            return "חיים  הלוי, 6 שדרות";
+            return bl.GetCoordinateFromExif(picPath).ToString();
         }
 
         private static string CreateKey(string date)
@@ -180,8 +203,8 @@ namespace FL_Project.Model
         {
             List<Report> Report_List = new List<Report>()
             {
-          new Report{lat=32.184448,log= 34.870766,Report_Id = 222,Id=1, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
-          new Report{lat=31.705791,log= 35.200657,Report_Id = 222,Id=1, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
+         // new Report{lat=32.184448,log= 34.870766,Report_Id = 222,Id=1, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
+         // new Report{lat=31.705791,log= 35.200657,Report_Id = 222,Id=1, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
           //new Report{lat=31.801447,log= 34.643497,Report_Id = 222, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
           //new Report{lat=32.699635,log= 35.303547,Report_Id = 222, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
           //new Report{lat=32.017136,log= 34.745441,Report_Id = 222, Time = DateTime.Now,Name = "d",Report_Adress = "d",Boom_count = 3,ImagePath = ""},
@@ -277,6 +300,26 @@ namespace FL_Project.Model
         {
             string key = CreateKey(afl.Date);
             bool isAdded = false;
+
+
+            List<Report> r = new List<Report>();
+            double[] latLog = bl.GetCoordinate(afl.Adress);
+            DateTime enteredDate = DateTime.Parse(afl.Date);
+            Drop d1 = new Drop
+            {
+                Drop_Id = afl.ID,
+                Drop_Adress = afl.Adress,
+                Drop_time = enteredDate,
+
+                Reports_list = r,
+               Real_lat = latLog[0],
+                Real_log = latLog[1],
+                Estimeated_lat = latLog[0],
+                Estimeated_log = latLog[1],
+            };     
+            bl.AddDrop(d1);
+
+
             foreach (var item in FallLocationData)
             {
                 if (item.GruopId.Equals(key))
@@ -301,6 +344,10 @@ namespace FL_Project.Model
         public static void AddFL(FallLocation fl)
         {
             //add to DATALayer
+            Report report = FlToReport(fl);
+            bl.AddReport(report);
+
+
             //add fitt gouplist
             string key = CreateKey(fl.Date);
             bool isAdded = false;
@@ -349,14 +396,29 @@ namespace FL_Project.Model
         private static int GetDistance(FallLocation efl, FallLocation afl)
         {
             //TODO impliment real one, now it return a random number 
-            return random.Next(0, 150);
+            double[] d1ll = { 0, 0 };
+            double[] d2ll = { 0, 0 };
+            d1ll=bl.GetCoordinate(efl.Adress);
+            d2ll = bl.GetCoordinate(afl.Adress);
+            Drop d1 = new Drop { Estimeated_lat =d1ll[0], Estimeated_log =d1ll[1]};
+            Drop d2 = new Drop { Estimeated_lat =d2ll[0], Estimeated_log =d2ll[1]};
+            int result = (int)bl.EvaluateDistance(d1, d2);
+            return result;
         }
 
 
         static FallLocation EvaluateEstimateFallLocation(ObservableCollection<FallLocation> fallLocations)
         {
-              //TODO Implement for real
-             return fallLocations.First();
+            //TODO Implement for real
+            List<FallLocation> flList = new List<FallLocation>(fallLocations);
+            List<Drop> res = bl.CalculateEstimateDrop(ListOfFallLocationToReports(flList));
+            FallLocation fl = new FallLocation();
+            fl.Adress = res.First().Drop_Adress;
+            fl.Date = res.First().Drop_time.ToString();
+            fl.ID = res.First().Drop_Id;                         
+            fl.NumberOfFalls = 1; //logically correct
+
+            return fl;
         }
     }
 }
